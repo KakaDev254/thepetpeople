@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: thepetpeople
+    env: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn thepetpeople.wsgi:application"
+    plan: free
+    region: oregon
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
