@@ -1,0 +1,40 @@
+{% extends "main/base.html" %} {% load static %} {% block title %}Checkout - The
+Pet People{% endblock %} {% block content %}
+<section class="pt-32 pb-20 px-6 lg:px-8 max-w-4xl mx-auto">
+  <h1 class="text-4xl font-bold text-[var(--club-dark-brown)] mb-8">
+    Checkout
+  </h1>
+
+  {% if cart.items.all %}
+  <div class="bg-white p-6 rounded-lg shadow-md">
+    <h2 class="text-xl font-semibold mb-4">Order Summary</h2>
+
+    <ul class="divide-y divide-gray-200 mb-4">
+      {% for item in cart.items.all %}
+      <li class="py-2 flex justify-between">
+        <span>{{ item.product.name }} × {{ item.quantity }}</span>
+        <span>${{ item.get_subtotal }}</span>
+      </li>
+      {% endfor %}
+    </ul>
+
+    <div class="flex justify-between font-bold text-lg mb-6">
+      <span>Total:</span>
+      <span>${{ total }}</span>
+    </div>
+
+    <form method="POST" action="{% url 'checkout' %}">
+      {% csrf_token %}
+      <button
+        type="submit"
+        class="bg-[var(--club-rust)] hover:bg-[var(--club-dark-brown)] text-white px-6 py-3 rounded-md w-full transition font-semibold"
+      >
+        Confirm Order
+      </button>
+    </form>
+  </div>
+  {% else %}
+  <p class="text-gray-600">Your cart is empty.</p>
+  {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>{% block title %}ThePetPeople{% endblock %}</title>
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Boxicons CDN -->
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Compiled Tailwind CSS -->
+    <link href="{% static 'core/css/output.css' %}" rel="stylesheet" />
+
+    <!-- Custom Variables and Base Styles -->
+    <style>
+      :root {
+        --club-dark-brown: #3f2c00;
+        --club-dark-brown-light: #827559;
+        --club-olive: #454024;
+        --club-olive-light: #868270;
+        --club-rust: #823210;
+        --club-rust-light: #ad7963;
+        --club-taupe: #95866e;
+        --club-taupe-light: #bab0a0;
+        --club-sand: #d2b699;
+        --club-sand-light: #e1cfbc;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      .navbar {
+        transition: all 0.3s ease-in-out;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #fff;
+        color: #333;
+        /* ✅ Adjust content below fixed header */
+        padding-top: 100px; /* total height for header + info bar */
+      }
+
+      @media (max-width: 768px) {
+        body {
+          padding-top: 80px; /* slightly smaller header height on mobile */
+        }
+      }
+    </style>
+
+    {% block extra_head %}{% endblock %}
+  </head>
+
+  <body class="font-sans antialiased min-h-screen flex flex-col">
+    <!-- Django messages (top-right corner) -->
+    {% if messages %}
+    <div class="fixed top-5 right-5 z-50">
+      {% for message in messages %}
+      <div
+        class="bg-[var(--club-sand)] text-white px-4 py-2 rounded-md mb-2 shadow-md"
+      >
+        {{ message }}
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- NAVBAR -->
+    {% include "main/partials/navbar.html" %}
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1">{% block content %}{% endblock %}</main>
+
+    <!-- FOOTER -->
+    {% include "main/partials/footer.html" %}
+
+    <!-- JS Scripts -->
+    <script src="{% static 'js/main.js' %}"></script>
+    {% block extra_scripts %}{% endblock %}
+  </body>
+</html>

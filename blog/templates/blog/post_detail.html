@@ -1,0 +1,117 @@
+{% extends "main/base.html" %} {% load static %} {% block title %}{{ post.title
+}} - The Pet People{% endblock %} {% block content %}
+<!-- HERO / TITLE SECTION -->
+<section
+  class="relative pt-32 pb-12 text-center text-white mt-[80px] bg-[var(--club-taupe-light)]"
+>
+  <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+
+  <div class="relative z-10">
+    <h2
+      class="text-4xl sm:text-5xl font-normal leading-snug font-['Cinzel'] tracking-wide"
+    >
+      {{ post.title }}
+    </h2>
+    <p class="mt-2 text-[var(--club-sand-light)] text-lg">
+      Posted by {{ post.author }} on {{ post.created_at|date:"F j, Y" }}
+    </p>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<main
+  class="max-w-7xl mx-auto px-6 py-20 grid grid-cols-1 lg:grid-cols-3 gap-10"
+>
+  <!-- BLOG CONTENT -->
+  <article
+    class="lg:col-span-2 bg-[var(--club-sand-light)] rounded-2xl shadow-sm p-8"
+  >
+    {% if post.featured_image %}
+    <img
+      src="{{ post.featured_image.url }}"
+      alt="{{ post.title }}"
+      class="rounded-xl mb-6 w-full object-cover"
+    />
+    {% endif %}
+
+    <div class="prose max-w-none text-[var(--club-dark-brown)] leading-relaxed">
+      {{ post.content|safe }}
+    </div>
+
+    <!-- Back to Blog -->
+    <div class="mt-10">
+      <a
+        href="{% url 'post_list' %}"
+        class="inline-block px-5 py-2 border border-[var(--club-rust)] text-[var(--club-rust)] rounded-full hover:bg-[var(--club-rust)] hover:text-white transition"
+      >
+        ← Back to Blog
+      </a>
+    </div>
+  </article>
+
+  <!-- SIDEBAR -->
+  <aside class="space-y-8 lg:sticky lg:top-32 self-start">
+    <!-- Recent Posts (Static Placeholder) -->
+    <div class="bg-[var(--club-sand-light)] rounded-2xl shadow-sm p-6">
+      <h3
+        class="text-xl font-semibold text-[var(--club-dark-brown)] mb-4 border-b border-[var(--club-sand)] pb-2"
+      >
+        Recent Posts
+      </h3>
+      <ul class="space-y-3 text-[var(--club-olive-light)]">
+        <li>
+          <a href="#" class="hover:text-[var(--club-rust)] transition">
+            How to Groom Your Pet Like a Pro
+          </a>
+        </li>
+        <li>
+          <a href="#" class="hover:text-[var(--club-rust)] transition">
+            10 Health Tips for Your Dog
+          </a>
+        </li>
+        <li>
+          <a href="#" class="hover:text-[var(--club-rust)] transition">
+            Choosing the Right Food for Cats
+          </a>
+        </li>
+        <li>
+          <a href="#" class="hover:text-[var(--club-rust)] transition">
+            Signs Your Pet Needs a Vet Visit
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Categories (Static Example) -->
+    <div class="bg-[var(--club-sand-light)] rounded-2xl shadow-sm p-6">
+      <h3
+        class="text-xl font-semibold text-[var(--club-dark-brown)] mb-4 border-b border-[var(--club-sand)] pb-2"
+      >
+        Categories
+      </h3>
+      <ul class="space-y-3 text-[var(--club-olive-light)]">
+        <li>
+          <a href="#" class="hover:text-[var(--club-rust)] transition"
+            >Pet Care</a
+          >
+        </li>
+        <li>
+          <a href="#" class="hover:text-[var(--club-rust)] transition"
+            >Training</a
+          >
+        </li>
+        <li>
+          <a href="#" class="hover:text-[var(--club-rust)] transition"
+            >Health Tips</a
+          >
+        </li>
+        <li>
+          <a href="#" class="hover:text-[var(--club-rust)] transition"
+            >Stories</a
+          >
+        </li>
+      </ul>
+    </div>
+  </aside>
+</main>
+{% endblock %}

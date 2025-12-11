@@ -1,0 +1,265 @@
+<header id="header" class="fixed w-full z-30 top-0 left-0">
+  <!-- INFO BAR -->
+  <div
+    id="info-bar"
+    class="hidden md:flex bg-[var(--club-sand-light)] text-dark text-xs transition-colors duration-300 py-[2px]"
+  >
+    <div
+      class="max-w-7xl mx-auto px-3 sm:px-5 lg:px-8 flex justify-between w-full items-center"
+    >
+      <!-- Left side: social media -->
+      <div class="flex items-center space-x-3">
+        <a
+          href="#"
+          class="hover:text-[var(--club-rust)] transition"
+          aria-label="Facebook"
+        >
+          <i class="bx bxl-facebook text-sm"></i>
+        </a>
+        <a
+          href="#"
+          class="hover:text-[var(--club-rust)] transition"
+          aria-label="Instagram"
+        >
+          <i class="bx bxl-instagram text-sm"></i>
+        </a>
+        <a
+          href="#"
+          class="hover:text-[var(--club-rust)] transition"
+          aria-label="Twitter"
+        >
+          <i class="bx bxl-twitter text-sm"></i>
+        </a>
+      </div>
+
+      <!-- Center: opening hours -->
+      <div
+        class="hidden sm:flex justify-center text-[10px] text-dark font-['Montserrat']"
+      >
+        (Mon–Sat: 9am–9pm | Sun: 10am–8pm)
+      </div>
+
+      <!-- Right side: contact -->
+      <div class="flex items-center space-x-2 font-['Montserrat']">
+        <a
+          href="tel:+254700123456"
+          class="flex items-center space-x-1 hover:text-[var(--club-rust)] transition"
+        >
+          <i class="bx bx-phone text-sm" aria-hidden="true"></i>
+          <span class="sr-only">Call</span>
+          <span class="text-[11px]">+254 700 123 456</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav
+    id="navbar"
+    role="navigation"
+    aria-label="Main navigation"
+    class="navbar w-full bg-white shadow-sm"
+  >
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16 items-center">
+        <!-- Logo -->
+        <a href="{% url 'home' %}" class="flex items-center gap-3">
+          <div
+            class="w-10 h-10 rounded-full bg-[var(--club-sand-light)] flex items-center justify-center text-[var(--club-dark-brown)] font-bold"
+          >
+            TPP
+          </div>
+          <div>
+            <div class="text-sm font-medium">ThePetPeople</div>
+            <div class="text-xs text-gray-500">Care • Groom • Love</div>
+          </div>
+        </a>
+
+        <!-- Desktop links -->
+        <div class="hidden md:flex items-center space-x-6 font-['Inter']">
+          {% if request.resolver_match.url_name != 'home' %}
+          <!-- HOME LINK -->
+          <a
+            href="{% url 'home' %}"
+            class="nav-link text-[var(--club-brown-deep)] hover:text-[var(--club-sand)]"
+            >Home</a
+          >
+          {% endif %}
+
+          <a
+            href="#membership"
+            class="nav-link text-[var(--club-brown-deep)] hover:text-[var(--club-sand)]"
+            >Membership</a
+          >
+          <a
+            href="{% url 'gallery' %}"
+            class="nav-link text-[var(--club-brown-deep)] hover:text-[var(--club-sand)]"
+            >Gallery</a
+          >
+          <a
+            href="{% url 'event_list' %}"
+            class="nav-link text-[var(--club-brown-deep)] hover:text-[var(--club-sand)]"
+            >Events</a
+          >
+          <a
+            href="#contact"
+            class="nav-link text-[var(--club-brown-deep)] hover:text-[var(--club-sand)]"
+            >Contact</a
+          >
+          <a
+            href="{% url 'post_list' %}"
+            class="nav-link text-[var(--club-brown-deep)] hover:text-[var(--club-sand)]"
+            >Blogs</a
+          >
+          <a
+            href="{% url 'shop' %}"
+            class="nav-link text-[var(--club-brown-deep)] hover:text-[var(--club-sand)]"
+            >Shop</a
+          >
+        </div>
+
+        <!-- Right-side actions -->
+        <div class="hidden md:flex items-center space-x-4 font-['Montserrat']">
+          <!-- 🛒 Cart Icon -->
+          <a
+            href="{% url 'view_cart' %}"
+            class="relative text-[var(--club-dark-brown)] hover:text-[var(--club-rust)] transition"
+            aria-label="View Cart"
+          >
+            <i class="bx bx-cart text-2xl"></i>
+            {% if cart_item_count %}
+            <span
+              class="absolute -top-2 -right-2 text-[var(--club-rust)] font-bold text-xs"
+            >
+              {{ cart_item_count }}
+            </span>
+            {% endif %}
+          </a>
+
+          <!-- Login Button -->
+          <a
+            href="#"
+            class="inline-block bg-[var(--club-sand-light)] hover:bg-[var(--club-dark-brown)] text-white tracking-wide uppercase py-2.5 px-6 transition duration-300 nav-btn"
+            style="border-radius: 0"
+          >
+            Login
+          </a>
+        </div>
+
+        <!-- Mobile button -->
+        <button
+          id="mobile-menu-button"
+          type="button"
+          aria-controls="mobile-menu"
+          aria-expanded="false"
+          class="md:hidden p-2 rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white"
+        >
+          <svg
+            id="hamburger-icon"
+            class="h-6 w-6 block text-white"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="var(--club-sand)"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+          <svg
+            id="close-icon"
+            class="h-6 w-6 hidden text-white"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="var(--club-sand)"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div
+      id="mobile-menu"
+      class="hidden md:hidden bg-white border-t"
+      aria-hidden="true"
+    >
+      <div class="px-4 pb-4 pt-2 space-y-1 font-['Inter']">
+        {% if request.resolver_match.url_name != 'home' %}
+        <!-- HOME LINK (Mobile) -->
+        <a
+          href="{% url 'home' %}"
+          class="block px-3 py-2 rounded text-[var(--club-brown-deep)] hover:bg-gray-100"
+          >Home</a
+        >
+        {% endif %}
+
+        <a
+          href="#membership"
+          class="block px-3 py-2 rounded text-[var(--club-brown-deep)] hover:bg-gray-100"
+          >Membership</a
+        >
+        <a
+          href="{% url 'gallery' %}"
+          class="block px-3 py-2 rounded text-[var(--club-brown-deep)] hover:bg-gray-100"
+          >Gallery</a
+        >
+        <a
+          href="{% url 'event_list' %}"
+          class="block px-3 py-2 rounded text-[var(--club-brown-deep)] hover:bg-gray-100"
+          >Events</a
+        >
+        <a
+          href="#contact"
+          class="block px-3 py-2 rounded text-[var(--club-brown-deep)] hover:bg-gray-100"
+          >Contact</a
+        >
+        <a
+          href="{% url 'post_list' %}"
+          class="block px-3 py-2 rounded text-[var(--club-brown-deep)] hover:bg-gray-100"
+          >Blogs</a
+        >
+        <a
+          href="{% url 'shop' %}"
+          class="block px-3 py-2 rounded text-[var(--club-brown-deep)] hover:bg-gray-100"
+          >Shop</a
+        >
+
+        <!-- 🛒 Cart Icon (Mobile) -->
+        <a
+          href="{% url 'view_cart' %}"
+          class="flex items-center gap-2 text-[var(--club-brown-deep)] hover:text-[var(--club-rust)] px-3 py-2 rounded"
+        >
+          <i class="bx bx-cart text-xl"></i> View Cart {% if cart_item_count %}
+          <span
+            class="ml-1 bg-[var(--club-rust)] text-white text-xs font-bold px-1.5 py-0.5 rounded-full"
+            >{{ cart_item_count }}</span
+          >
+          {% endif %}
+        </a>
+
+        <div class="pt-2">
+          <a
+            href="#"
+            class="block bg-[var(--club-sand-light)] hover:bg-[var(--club-dark-brown)] text-white tracking-wide uppercase py-2.5 px-6 text-center transition duration-300"
+            style="border-radius: 0"
+          >
+            Login
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>

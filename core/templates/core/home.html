@@ -1,0 +1,1288 @@
+{% extends "main/base.html" %} {% load static %} {% block title %}Home |
+ThePetPeople{% endblock %} {% block content %}
+<!-- ✅ HERO SECTION -->
+<section
+  id="home"
+  class="relative w-full h-[90vh] md:h-screen overflow-hidden font-['Cormorant_Garamond']"
+>
+  <!-- Overlay with gradient -->
+  <div
+    class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60 z-10"
+  ></div>
+
+  <!-- Background media -->
+  <div id="hero-slider" class="absolute inset-0 z-0">
+    <video
+      autoplay
+      muted
+      loop
+      playsinline
+      class="absolute inset-0 w-full h-full object-cover opacity-100 transition-opacity duration-1000"
+    >
+      <source src="{% static 'core/videos/hero1.mp4' %}" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+    <video
+      autoplay
+      muted
+      loop
+      playsinline
+      class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-1000"
+    >
+      <source src="{% static 'core/videos/hero3.mp4' %}" type="video/mp4" />
+    </video>
+    <video
+      autoplay
+      muted
+      loop
+      playsinline
+      class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-1000"
+    >
+      <source src="{% static 'core/videos/hero4.mp4' %}" type="video/mp4" />
+    </video>
+  </div>
+
+  <!-- Hero content -->
+  <div
+    class="relative z-20 flex flex-col items-center justify-center h-full text-center px-6 sm:px-8 md:px-12 lg:px-20 pt-28 sm:pt-32 md:pt-40 xl:pt-48 py-8 md:py-12"
+  >
+    <!-- Heading -->
+    <h1
+      class="text-3xl sm:text-4xl md:text-6xl mb-4 sm:mb-6 md:mb-8 leading-snug md:leading-tight text-white tracking-wide text-center font-semibold"
+    >
+      <span class="block md:inline">Love Them, Care for&nbsp;</span>
+      <span class="block md:inline">Them</span>
+    </h1>
+
+    <!-- Subtitle -->
+    <p
+      class="text-white text-sm sm:text-base md:text-lg mb-8 sm:mb-10 md:mb-12 max-w-xl sm:max-w-2xl font-['Inter'] italic leading-relaxed"
+    >
+      Loving Care, Fun Community
+    </p>
+
+    <!-- CTA buttons -->
+    <div
+      class="flex flex-col sm:flex-row gap-3 sm:gap-6 mb-10 sm:mb-14 md:mb-16 w-full sm:w-auto justify-center"
+    >
+      <a
+        href="{% url 'book-service' %}"
+        class="inline-block bg-[var(--club-sand)] text-[var(--club-dark-brown)] uppercase tracking-wide py-3 px-8 sm:px-10 shadow-lg hover:shadow-2xl transform hover:scale-105 transition duration-300 text-center font-['Inter'] font-medium"
+      >
+        Book Now
+      </a>
+
+      <a
+        href="#services"
+        class="inline-block border-2 border-[var(--club-taupe)] text-[var(--club-sand)] hover:bg-[var(--club-taupe)] hover:text-white tracking-wide py-3 px-8 sm:px-10 rounded transition duration-300 ease-in-out text-center font-['Inter'] font-medium"
+      >
+        See Services
+      </a>
+    </div>
+
+    <!-- Explore with animated mouse -->
+    <div
+      class="flex flex-col items-center space-y-2 sm:space-y-3 mt-10 sm:mt-16"
+    >
+      <span
+        class="text-white text-xs sm:text-sm md:text-base uppercase tracking-widest font-['Inter']"
+      >
+        Explore
+      </span>
+      <div
+        class="w-5 h-8 sm:w-6 sm:h-10 border-2 border-[var(--club-sand-light)] rounded-full flex items-start justify-center p-1"
+      >
+        <div
+          class="w-1 h-2 bg-[var(--club-sand-light)] rounded-full animate-bounce"
+        ></div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ✅ FLOATING SOCIAL MENU (Mobile only) -->
+<div class="fixed bottom-6 right-6 md:hidden z-50">
+  <!-- Social Icons -->
+  <div
+    id="social-icons"
+    class="hidden flex flex-col items-center space-y-3 mb-3"
+  >
+    <a
+      href="#"
+      class="w-12 h-12 flex items-center justify-center rounded-full bg-[#1877F2] text-white shadow-lg"
+    >
+      <i class="bx bxl-facebook text-2xl"></i>
+    </a>
+    <a
+      href="#"
+      class="w-12 h-12 flex items-center justify-center rounded-full bg-[#E4405F] text-white shadow-lg"
+    >
+      <i class="bx bxl-instagram text-2xl"></i>
+    </a>
+    <a
+      href="#"
+      class="w-12 h-12 flex items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg"
+    >
+      <i class="bx bxl-whatsapp text-2xl"></i>
+    </a>
+  </div>
+
+  <!-- Toggle Button -->
+  <button
+    id="social-toggle"
+    class="w-14 h-14 flex items-center justify-center rounded-full bg-[var(--club-olive)] text-white shadow-lg"
+  >
+    <i id="toggle-icon" class="bx bx-message-rounded-dots text-3xl"></i>
+  </button>
+</div>
+
+<!-- ✅ ABOUT SECTION -->
+<section id="about" class="py-16 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 text-center">
+    <h2
+      class="text-3xl md:text-4xl font-semibold text-[var(--club-dark-brown)] mb-6 font-['Cormorant_Garamond']"
+    >
+      Why Choose
+      <span class="text-[var(--club-taupe)]">The Pet People?</span>
+    </h2>
+
+    <p
+      class="text-[var(--club-olive)] max-w-2xl mx-auto mb-12 font-['Inter'] text-lg leading-relaxed"
+    >
+      We’re more than just a pet-friendly club — we’re a vibrant community for
+      <span class="font-semibold text-[var(--club-rust)]">dogs</span>,
+      <span class="font-semibold text-[var(--club-taupe)]">cats</span>, and
+      <span class="font-semibold text-[var(--club-olive)]">exotic pets</span>.
+      From safe play spaces to fun events, we create a welcoming environment
+      where pets and people thrive together.
+    </p>
+
+    <!-- Features Grid -->
+    <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+      <!-- Feature 1 -->
+      <div
+        class="bg-white shadow hover:shadow-lg transition p-6 min-h-[28rem] flex flex-col"
+      >
+        <img
+          src="{% static 'core/images/about1.jpg' %}"
+          alt="Pet Friendly Spaces"
+          class="w-full h-60 object-cover mb-4"
+          loading="lazy"
+        />
+        <h3
+          class="text-xl font-semibold text-[var(--club-dark-brown)] mb-2 font-['Cormorant_Garamond']"
+        >
+          Pet-Friendly Spaces
+        </h3>
+        <p
+          class="text-[var(--club-olive)] font-['Inter'] text-sm leading-relaxed mt-auto"
+        >
+          Safe and fun spaces for dogs, cats, and exotic pets to play and bond.
+        </p>
+      </div>
+
+      <!-- Feature 2 -->
+      <div
+        class="bg-white shadow hover:shadow-lg transition p-6 min-h-[28rem] flex flex-col"
+      >
+        <img
+          src="{% static 'core/images/about2.jpg' %}"
+          alt="Community Events"
+          class="w-full h-60 object-cover mb-4"
+          loading="lazy"
+        />
+        <h3
+          class="text-xl font-semibold text-[var(--club-dark-brown)] mb-2 font-['Cormorant_Garamond']"
+        >
+          Community Events
+        </h3>
+        <p
+          class="text-[var(--club-olive)] font-['Inter'] text-sm leading-relaxed mt-auto"
+        >
+          Join meetups, workshops, and fun activities for pets and their people.
+        </p>
+      </div>
+
+      <!-- Feature 3 -->
+      <div
+        class="bg-white shadow hover:shadow-lg transition p-6 min-h-[28rem] flex flex-col"
+      >
+        <img
+          src="{% static 'core/images/about3.jpg' %}"
+          alt="Trusted and Loved"
+          class="w-full h-60 object-cover mb-4"
+          loading="lazy"
+        />
+        <h3
+          class="text-xl font-semibold text-[var(--club-dark-brown)] mb-2 font-['Cormorant_Garamond']"
+        >
+          Trusted & Loved
+        </h3>
+        <p
+          class="text-[var(--club-olive)] font-['Inter'] text-sm leading-relaxed mt-auto"
+        >
+          Over <strong>100+ happy members</strong> trust us to care for their
+          pets.
+        </p>
+      </div>
+
+      <!-- Feature 4 -->
+      <div
+        class="bg-white shadow hover:shadow-lg transition p-6 min-h-[28rem] flex flex-col"
+      >
+        <img
+          src="{% static 'core/images/about4.jpg' %}"
+          alt="Safe & Secure"
+          class="w-full h-60 object-cover mb-4"
+          loading="lazy"
+        />
+        <h3
+          class="text-xl font-semibold text-[var(--club-dark-brown)] mb-2 font-['Cormorant_Garamond']"
+        >
+          Safe & Secure
+        </h3>
+        <p
+          class="text-[var(--club-olive)] font-['Inter'] text-sm leading-relaxed mt-auto"
+        >
+          A well-monitored, secure environment ensures peace of mind for pet
+          owners.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- COMMUNITY SECTION -->
+<section id="community" class="py-20 bg-[var(--club-taupe)]">
+  <div
+    class="max-w-7xl mx-auto px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
+  >
+    <!-- Left Image -->
+    <div class="relative">
+      <img
+        src="{% static 'core/images/community.jpg' %}"
+        alt="Community members socializing"
+        class="shadow-lg object-cover w-full h-[420px] rounded-none"
+        loading="lazy"
+      />
+    </div>
+
+    <!-- Right Content -->
+    <div>
+      <h4
+        class="text-sm uppercase tracking-widest text-[var(--club-lavender)] font-semibold mb-2 font-['Inter']"
+      >
+        Community members socializing
+      </h4>
+
+      <h2
+        class="text-3xl md:text-4xl font-semibold text-[var(--club-dark-brown)] mb-4 font-['Cormorant_Garamond'] leading-snug"
+      >
+        More Than Just a Dog Park
+      </h2>
+
+      <p
+        class="text-white mb-8 leading-relaxed font-['Cormorant_Garamond'] text-base md:text-lg"
+      >
+        ThePetPeople Club is a community where lasting friendships are formed.
+        Our members don't just bring their dogs – they bring their whole
+        families and become part of something special.
+      </p>
+
+      <!-- Stats -->
+      <div class="grid grid-cols-2 gap-6 mb-8">
+        <div>
+          <h3
+            class="text-4xl font-semibold text-[var(--club-lavender)] font-['Cormorant_Garamond']"
+          >
+            10+
+          </h3>
+          <p
+            class="text-[var(--club-lavender)] text-sm md:text-base font-['Inter']"
+          >
+            Events Monthly
+          </p>
+        </div>
+        <div>
+          <h3
+            class="text-4xl font-semibold text-[var(--club-lavender)] font-['Cormorant_Garamond']"
+          >
+            95%
+          </h3>
+          <p
+            class="text-[var(--club-lavender)] text-sm md:text-base font-['Inter']"
+          >
+            Member Satisfaction
+          </p>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <a
+        href="#events"
+        class="inline-block bg-[var(--club-dark-brown)] hover:bg-[var(--club-brown-medium)] text-white font-semibold py-3 px-8 shadow-lg transition-all duration-300 transform hover:scale-105 font-['Inter']"
+      >
+        View Upcoming Events
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES SECTION -->
+<section id="services" class="py-20 bg-[#fefcf7]">
+  <div class="max-w-7xl mx-auto px-4">
+    <!-- Section Title -->
+    <h2
+      class="text-4xl font-bold text-[var(--club-dark-brown)] mb-4 text-center font-['Cormorant_Garamond']"
+    >
+      Our Services
+    </h2>
+
+    <!-- Intro Text -->
+    <p
+      class="text-[var(--club-olive)] max-w-2xl mx-auto mb-12 font-['Inter'] text-lg leading-relaxed text-center"
+    >
+      At The Pet People, we care for dogs, cats, and exotic pets through
+      grooming, daycare, training, and fun activities — ensuring every pet stays
+      happy, healthy, and loved.
+    </p>
+
+    <!-- Services Grid -->
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+    >
+      <!-- Boarding -->
+      <div
+        class="relative group cursor-pointer overflow-hidden rounded-lg shadow-lg"
+      >
+        <img
+          src="{% static 'core/images/boarding.jpg' %}"
+          alt="Boarding"
+          class="w-full h-96 object-cover transform transition-transform duration-500 group-hover:scale-110"
+        />
+        <div
+          class="absolute top-3 left-3 bg-[var(--club-taupe)] text-white px-4 py-1 text-sm font-semibold font-['Montserrat'] rounded"
+        >
+          Boarding 🏠
+        </div>
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-[var(--club-dark-brown)]/95 via-[var(--club-dark-brown)]/80 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end text-center text-white p-6"
+        >
+          <p
+            class="mb-4 opacity-0 group-hover:opacity-100 transform translate-y-3 group-hover:translate-y-0 transition-all duration-700 ease-out"
+          >
+            Safe overnight and extended stays for your pets with loving care.
+          </p>
+          <a
+            href="{% url 'book-service' %}"
+            class="inline-block bg-[var(--club-sand-light)] hover:bg-[var(--club-sand)] text-white px-5 py-2 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 font-['Inter'] opacity-0 group-hover:opacity-100 group-hover:translate-y-0 translate-y-3"
+          >
+            Book Now
+          </a>
+        </div>
+      </div>
+
+      <!-- Grooming -->
+      <div
+        class="relative group cursor-pointer overflow-hidden rounded-lg shadow-lg"
+      >
+        <img
+          src="{% static 'core/images/grooming.jpg' %}"
+          alt="Grooming"
+          class="w-full h-96 object-cover transform transition-transform duration-500 group-hover:scale-110"
+        />
+        <div
+          class="absolute top-3 left-3 bg-[var(--club-taupe)] text-white px-4 py-1 text-sm font-semibold font-['Montserrat'] rounded"
+        >
+          Grooming ✂️
+        </div>
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-[var(--club-dark-brown)]/95 via-[var(--club-dark-brown)]/80 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end text-center text-white p-6"
+        >
+          <p
+            class="mb-4 opacity-0 group-hover:opacity-100 transform translate-y-3 group-hover:translate-y-0 transition-all duration-700 ease-out"
+          >
+            Bathing, haircut, nail trimming, and styling for all pets.
+          </p>
+          <a
+            href="{% url 'book-service' %}"
+            class="inline-block bg-[var(--club-sand-light)] hover:bg-[var(--club-sand)] text-white px-5 py-2 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 font-['Inter'] opacity-0 group-hover:opacity-100 group-hover:translate-y-0 translate-y-3"
+          >
+            Book Now
+          </a>
+        </div>
+      </div>
+
+      <!-- Play Time -->
+      <div
+        class="relative group cursor-pointer overflow-hidden rounded-lg shadow-lg"
+      >
+        <img
+          src="{% static 'core/images/play-time.jpg' %}"
+          alt="Play Time"
+          class="w-full h-96 object-cover transform transition-transform duration-500 group-hover:scale-110"
+        />
+        <div
+          class="absolute top-3 left-3 bg-[var(--club-taupe)] text-white px-4 py-1 text-sm font-semibold font-['Montserrat'] rounded"
+        >
+          Play Time 🏊‍♂️
+        </div>
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-[var(--club-dark-brown)]/95 via-[var(--club-dark-brown)]/80 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end text-center text-white p-6"
+        >
+          <p
+            class="mb-4 opacity-0 group-hover:opacity-100 transform translate-y-3 group-hover:translate-y-0 transition-all duration-700 ease-out"
+          >
+            Fun activities and supervised play sessions for socialization.
+          </p>
+          <a
+            href="{% url 'book-service' %}"
+            class="inline-block bg-[var(--club-sand-light)] hover:bg-[var(--club-sand)] text-white px-5 py-2 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 font-['Inter'] opacity-0 group-hover:opacity-100 group-hover:translate-y-0 translate-y-3"
+          >
+            Book Now
+          </a>
+        </div>
+      </div>
+
+      <!-- Curated Meals -->
+      <div
+        class="relative group cursor-pointer overflow-hidden rounded-lg shadow-lg"
+      >
+        <img
+          src="{% static 'core/images/meals.jpg' %}"
+          alt="Curated Meals"
+          class="w-full h-96 object-cover transform transition-transform duration-500 group-hover:scale-110"
+        />
+        <div
+          class="absolute top-3 left-3 bg-[var(--club-taupe)] text-white px-4 py-1 text-sm font-semibold font-['Montserrat'] rounded"
+        >
+          Curated Meals 🍲
+        </div>
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-[var(--club-dark-brown)]/95 via-[var(--club-dark-brown)]/80 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end text-center text-white p-6"
+        >
+          <p
+            class="mb-4 opacity-0 group-hover:opacity-100 transform translate-y-3 group-hover:translate-y-0 transition-all duration-700 ease-out"
+          >
+            Balanced and customized meals for your pet's dietary needs.
+          </p>
+          <a
+            href="{% url 'book-service' %}"
+            class="inline-block bg-[var(--club-sand-light)] hover:bg-[var(--club-sand)] text-white px-5 py-2 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 font-['Inter'] opacity-0 group-hover:opacity-100 group-hover:translate-y-0 translate-y-3"
+          >
+            Book Now
+          </a>
+        </div>
+      </div>
+
+      <!-- Fitness & Training -->
+      <div
+        class="relative group cursor-pointer overflow-hidden rounded-lg shadow-lg"
+      >
+        <img
+          src="{% static 'core/images/training.jpg' %}"
+          alt="Fitness & Training"
+          class="w-full h-96 object-cover transform transition-transform duration-500 group-hover:scale-110"
+        />
+        <div
+          class="absolute top-3 left-3 bg-[var(--club-taupe)] text-white px-4 py-1 text-sm font-semibold font-['Montserrat'] rounded"
+        >
+          Fitness & Training 🐕
+        </div>
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-[var(--club-dark-brown)]/95 via-[var(--club-dark-brown)]/80 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end text-center text-white p-6"
+        >
+          <p
+            class="mb-4 opacity-0 group-hover:opacity-100 transform translate-y-3 group-hover:translate-y-0 transition-all duration-700 ease-out"
+          >
+            Obedience, behavioral training, and active exercises for pets.
+          </p>
+          <a
+            href="{% url 'book-service' %}"
+            class="inline-block bg-[var(--club-sand-light)] hover:bg-[var(--club-sand)] text-white px-5 py-2 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 font-['Inter'] opacity-0 group-hover:opacity-100 group-hover:translate-y-0 translate-y-3"
+          >
+            Book Now
+          </a>
+        </div>
+      </div>
+
+      <!-- Pet Massages -->
+      <div
+        class="relative group cursor-pointer overflow-hidden rounded-lg shadow-lg"
+      >
+        <img
+          src="{% static 'core/images/massage.png' %}"
+          alt="Pet Massages"
+          class="w-full h-96 object-cover transform transition-transform duration-500 group-hover:scale-110"
+        />
+        <div
+          class="absolute top-3 left-3 bg-[var(--club-taupe)] text-white px-4 py-1 text-sm font-semibold font-['Montserrat'] rounded"
+        >
+          Massages & Physio
+        </div>
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-[var(--club-dark-brown)]/95 via-[var(--club-dark-brown)]/80 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end text-center text-white p-6"
+        >
+          <p
+            class="mb-4 opacity-0 group-hover:opacity-100 transform translate-y-3 group-hover:translate-y-0 transition-all duration-700 ease-out"
+          >
+            Therapeutic massages and physiotherapy for pets’ health.
+          </p>
+          <a
+            href="{% url 'book-service' %}"
+            class="inline-block bg-[var(--club-sand-light)] hover:bg-[var(--club-sand)] text-white px-5 py-2 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 font-['Inter'] opacity-0 group-hover:opacity-100 group-hover:translate-y-0 translate-y-3"
+          >
+            Book Now
+          </a>
+        </div>
+      </div>
+
+      <!-- Coffee Bar -->
+      <div
+        class="relative group cursor-pointer overflow-hidden rounded-lg shadow-lg"
+      >
+        <img
+          src="{% static 'core/images/coffee.png' %}"
+          alt="Pet People Coffee Bar"
+          class="w-full h-96 object-cover transform transition-transform duration-500 group-hover:scale-110"
+        />
+        <div
+          class="absolute top-3 left-3 bg-[var(--club-taupe)] text-white px-4 py-1 text-sm font-semibold font-['Montserrat'] rounded"
+        >
+          Pet People Coffee Bar ☕
+        </div>
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-[var(--club-dark-brown)]/95 via-[var(--club-dark-brown)]/80 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end text-center text-white p-6"
+        >
+          <p
+            class="mb-4 opacity-0 group-hover:opacity-100 transform translate-y-3 group-hover:translate-y-0 transition-all duration-700 ease-out"
+          >
+            Enjoy a coffee while your pets play or socialize.
+          </p>
+          <a
+            href="{% url 'book-service' %}"
+            class="inline-block bg-[var(--club-sand-light)] hover:bg-[var(--club-sand)] text-white px-5 py-2 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 font-['Inter'] opacity-0 group-hover:opacity-100 group-hover:translate-y-0 translate-y-3"
+          >
+            Book Now
+          </a>
+        </div>
+      </div>
+
+      <!-- Working Space -->
+      <div
+        class="relative group cursor-pointer overflow-hidden rounded-lg shadow-lg"
+      >
+        <img
+          src="{% static 'core/images/working_space.png' %}"
+          alt="Pet People Workspace"
+          class="w-full h-96 object-cover transform transition-transform duration-500 group-hover:scale-110"
+        />
+        <div
+          class="absolute top-3 left-3 bg-[var(--club-taupe)] text-white px-4 py-1 text-sm font-semibold font-['Montserrat'] rounded"
+        >
+          Working Space 💻
+        </div>
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-[var(--club-dark-brown)]/95 via-[var(--club-dark-brown)]/80 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end text-center text-white p-6"
+        >
+          <p
+            class="mb-4 opacity-0 group-hover:opacity-100 transform translate-y-3 group-hover:translate-y-0 transition-all duration-700 ease-out"
+          >
+            Dedicated workspace for pet owners to work while pets enjoy
+            activities.
+          </p>
+          <a
+            href="{% url 'book-service' %}"
+            class="inline-block bg-[var(--club-sand-light)] hover:bg-[var(--club-sand)] text-white px-5 py-2 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 font-['Inter'] opacity-0 group-hover:opacity-100 group-hover:translate-y-0 translate-y-3"
+          >
+            Book Now
+          </a>
+        </div>
+      </div>
+
+      <!-- Add-ons -->
+      <div
+        class="relative group cursor-pointer overflow-hidden rounded-lg shadow-lg col-span-full"
+      >
+        <img
+          src="{% static 'core/images/addons.png' %}"
+          alt="Add-ons"
+          class="w-full h-60 object-cover transform transition-transform duration-500 group-hover:scale-110"
+        />
+        <div
+          class="absolute top-3 left-3 bg-[var(--club-taupe)] text-white px-4 py-1 text-sm font-semibold font-['Montserrat'] rounded"
+        >
+          Add-ons ➕
+        </div>
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-[var(--club-dark-brown)]/95 via-[var(--club-dark-brown)]/80 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end text-center text-white p-6"
+        >
+          <p
+            class="mb-4 opacity-0 group-hover:opacity-100 transform translate-y-3 group-hover:translate-y-0 transition-all duration-700 ease-out"
+          >
+            Pick-up/Drop-off 🚐 | Insurance 🛡️
+          </p>
+          <a
+            href="{% url 'book-service' %}"
+            class="inline-block bg-[var(--club-sand-light)] hover:bg-[var(--club-sand)] text-white px-5 py-2 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 font-['Inter'] opacity-0 group-hover:opacity-100 group-hover:translate-y-0 translate-y-3"
+          >
+            Book Now
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- MEMBERSHIP SECTION -->
+<section id="membership" class="py-20 bg-[var(--club-sand)]">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 text-center">
+    <h2
+      class="text-3xl md:text-4xl font-bold text-[var(--club-dark-brown)] mb-4 font-['Cormorant_Garamond']"
+    >
+      Choose Your <span class="text-[var(--club-olive)]">Membership</span>
+    </h2>
+    <p
+      class="text-[var(--club-olive)] max-w-2xl mx-auto mb-12 font-['Cormorant_Garamond'] text-lg"
+    >
+      Flexible plans designed for every pet family — whether you have dogs,
+      cats, or exotic pets. Enjoy community perks, events, and exclusive
+      benefits tailored to your needs.
+    </p>
+
+    <!-- Pricing Grid -->
+    <div class="grid gap-8 md:grid-cols-3">
+      <!-- Basic Pack -->
+      <div
+        class="bg-white shadow hover:shadow-lg transition transform hover:-translate-y-2 p-8 flex flex-col rounded-lg"
+      >
+        <h3
+          class="text-xl font-semibold text-[var(--club-dark-brown)] mb-2 font-['Montserrat']"
+        >
+          Basic Pack
+        </h3>
+        <p class="text-[var(--club-olive)] mb-4 font-['Montserrat']">
+          Perfect for first-time members who want to experience The Pet People.
+        </p>
+        <div
+          class="text-4xl font-bold text-[var(--club-taupe)] mb-6 font-['Montserrat']"
+        >
+          $19<span class="text-lg">/mo</span>
+        </div>
+        <ul
+          class="text-[var(--club-olive)] space-y-3 flex-1 font-['Montserrat']"
+        >
+          <li>
+            <i class="fa-solid fa-check text-[var(--club-rust)] mr-2"></i>Access
+            to pet play areas
+          </li>
+          <li>
+            <i class="fa-solid fa-check text-[var(--club-rust)] mr-2"></i>2 free
+            community events
+          </li>
+          <li>
+            <i class="fa-solid fa-check text-[var(--club-rust)] mr-2"></i>Member
+            newsletter
+          </li>
+        </ul>
+        <a
+          href="#join"
+          class="mt-6 inline-block bg-[var(--club-sand)] hover:bg-[var(--club-dark-brown)] text-white font-semibold py-3 px-6 shadow-md transition transform hover:scale-105 font-['Montserrat']"
+        >
+          Join Basic Pack
+        </a>
+      </div>
+
+      <!-- Premium Pack -->
+      <div
+        class="bg-white shadow border-2 border-[var(--club-taupe)] p-8 flex flex-col transform scale-105 hover:shadow-2xl transition rounded-lg"
+      >
+        <h3
+          class="text-xl font-semibold text-[var(--club-dark-brown)] mb-2 font-['Montserrat']"
+        >
+          Premium Pack
+        </h3>
+        <p class="text-[var(--club-olive)] mb-4 font-['Montserrat']">
+          Our most popular plan with the perfect mix of perks for pets & owners.
+        </p>
+        <div
+          class="text-4xl font-bold text-[var(--club-taupe)] mb-6 font-['Montserrat']"
+        >
+          $39<span class="text-lg">/mo</span>
+        </div>
+        <ul
+          class="text-[var(--club-olive)] space-y-3 flex-1 font-['Montserrat']"
+        >
+          <li>
+            <i class="fa-solid fa-check text-[var(--club-rust)] mr-2"></i
+            >Unlimited play area access
+          </li>
+          <li>
+            <i class="fa-solid fa-check text-[var(--club-rust)] mr-2"></i>5
+            events monthly
+          </li>
+          <li>
+            <i class="fa-solid fa-check text-[var(--club-rust)] mr-2"></i>Guest
+            passes included
+          </li>
+          <li>
+            <i class="fa-solid fa-check text-[var(--club-rust)] mr-2"></i
+            >Member-only discounts
+          </li>
+        </ul>
+        <a
+          href="#join"
+          class="mt-6 inline-block bg-[var(--club-taupe)] hover:bg-[var(--club-olive)] text-white font-semibold py-3 px-6 shadow-md transition transform hover:scale-105 font-['Montserrat']"
+        >
+          Join Premium Pack
+        </a>
+      </div>
+
+      <!-- VIP Pack -->
+      <div
+        class="bg-white shadow hover:shadow-lg transition transform hover:-translate-y-2 p-8 flex flex-col rounded-lg"
+      >
+        <h3
+          class="text-xl font-semibold text-[var(--club-dark-brown)] mb-2 font-['Montserrat']"
+        >
+          VIP Pack
+        </h3>
+        <p class="text-[var(--club-olive)] mb-4 font-['Montserrat']">
+          Best for households with multiple pets and family members.
+        </p>
+        <div
+          class="text-4xl font-bold text-[var(--club-olive)] mb-6 font-['Montserrat']"
+        >
+          $59<span class="text-lg">/mo</span>
+        </div>
+        <ul
+          class="text-[var(--club-olive)] space-y-3 flex-1 font-['Montserrat']"
+        >
+          <li>
+            <i class="fa-solid fa-check text-[var(--club-rust)] mr-2"></i>All
+            Basic Pack perks
+          </li>
+          <li>
+            <i class="fa-solid fa-check text-[var(--club-rust)] mr-2"></i
+            >Unlimited event access
+          </li>
+          <li>
+            <i class="fa-solid fa-check text-[var(--club-rust)] mr-2"></i>Free
+            training sessions
+          </li>
+          <li>
+            <i class="fa-solid fa-check text-[var(--club-rust)] mr-2"></i
+            >Premium add-ons included
+          </li>
+        </ul>
+        <a
+          href="#join"
+          class="mt-6 inline-block bg-[var(--club-olive)] hover:bg-[var(--club-dark-brown)] text-white font-semibold py-3 px-6 shadow-md transition transform hover:scale-105 font-['Montserrat']"
+        >
+          Join VIP Pack
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- CTA VIDEO SECTION -->
+<section
+  id="cta"
+  class="relative w-full h-[500px] flex items-center justify-center text-center"
+>
+  <!-- Background Video -->
+  <video
+    autoplay
+    muted
+    loop
+    playsinline
+    poster="{% static 'images/ctavid-placeholder.jpg' %}"
+    class="absolute inset-0 w-full h-full object-cover z-0"
+  >
+    <source src="{% static 'core/videos/cta.mp4' %}" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Dark Overlay -->
+  <div class="absolute inset-0 bg-black bg-opacity-40 z-10"></div>
+
+  <!-- Content -->
+  <div class="relative z-20 px-6 max-w-3xl text-white">
+    <h2 class="text-3xl md:text-5xl font-bold mb-4 font-['Cormorant_Garamond']">
+      Ready to Join the Pack?
+    </h2>
+    <p
+      class="text-lg md:text-xl mb-8 font-['Inter'] font-light leading-relaxed"
+    >
+      ThePetPeople celebrates all pets — from playful dogs and curious cats to
+      exotic companions.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a
+        href="#membership"
+        class="bg-[var(--club-sand)] hover:bg-[var(--club-sand)] text-white font-medium py-3 px-6 transition font-['Inter']"
+      >
+        Start Membership
+      </a>
+      <a
+        href="#contact"
+        class="bg-white text-[var(--club-olive)] hover:bg-[var(--club-sand)] font-medium py-3 px-6 transition font-['Inter']"
+      >
+        Schedule a Visit
+      </a>
+    </div>
+  </div>
+</section>
+<!-- IN SAFE HANDS SECTION -->
+<section id="team" class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 text-center">
+    <h2
+      class="text-3xl md:text-4xl font-bold text-[var(--club-dark-brown)] mb-4 font-['Cormorant_Garamond']"
+    >
+      In <span class="text-[var(--club-olive)]">Safe Hands</span>
+    </h2>
+    <p
+      class="text-[var(--club-olive)] max-w-2xl mx-auto mb-12 text-lg font-['Inter'] font-light leading-relaxed"
+    >
+      Our dedicated team of caregivers, trainers, and veterinarians ensures
+      every pet receives the best care possible — with safety, comfort, and love
+      at every step.
+    </p>
+
+    <!-- Thin Downward Arrow Icon -->
+    <div class="flex justify-center mb-12">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.2"
+        stroke="var(--club-sand)"
+        class="w-6 h-6 animate-bounce"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M19 9l-7 7-7-7"
+        />
+      </svg>
+    </div>
+
+    <!-- Team Grid -->
+    <div class="grid gap-8 sm:grid-cols-2 md:grid-cols-3">
+      <!-- Team Member 1 -->
+      <div
+        class="bg-white border border-[var(--club-sand)] shadow-sm hover:shadow-lg transition transform hover:-translate-y-2 p-6"
+      >
+        <img
+          src="{% static 'core/images/drm.jpg' %}"
+          alt="Team Member"
+          class="w-40 h-40 object-cover mx-auto mb-4 rounded-full border-2 border-[var(--club-brown-soft)]"
+        />
+        <h3
+          class="text-xl font-semibold text-[var(--club-dark-brown)] font-['Cormorant_Garamond']"
+        >
+          Dr. Sophie Masika
+        </h3>
+        <p
+          class="text-[var(--club-dark-brown-light)] text-sm font-['Inter'] tracking-wide"
+        >
+          Chief Veterinarian (KESCAVA Member)
+        </p>
+      </div>
+
+      <!-- Team Member 2 -->
+      <div
+        class="bg-white border border-[var(--club-sand)] shadow-sm hover:shadow-lg transition transform hover:-translate-y-2 p-6"
+      >
+        <img
+          src="{% static 'core/images/drm.jpg' %}"
+          alt="Team Member"
+          class="w-40 h-40 object-cover mx-auto mb-4 rounded-full border-2 border-[var(--club-brown-soft)]"
+        />
+        <h3
+          class="text-xl font-semibold text-[var(--club-dark-brown)] font-['Cormorant_Garamond']"
+        >
+          Dr. John Mwangi
+        </h3>
+        <p
+          class="text-[var(--club-dark-brown-light)] text-sm font-['Inter'] tracking-wide"
+        >
+          Head of Pet Care & Training
+        </p>
+      </div>
+
+      <!-- Team Member 3 -->
+      <div
+        class="bg-white border border-[var(--club-sand)] shadow-sm hover:shadow-lg transition transform hover:-translate-y-2 p-6"
+      >
+        <img
+          src="{% static 'core/images/drm.jpg' %}"
+          alt="Team Member"
+          class="w-40 h-40 object-cover mx-auto mb-4 rounded-full border-2 border-[var(--club-brown-soft)]"
+        />
+        <h3
+          class="text-xl font-semibold text-[var(--club-dark-brown)] font-['Cormorant_Garamond']"
+        >
+          Dr. Aisha Kamau
+        </h3>
+        <p
+          class="text-[var(--club-dark-brown-light)] text-sm font-['Inter'] tracking-wide"
+        >
+          Veterinary Partner (KVA Member)
+        </p>
+      </div>
+    </div>
+
+    <!-- Trust Badges -->
+    <div
+      class="mt-12 flex flex-col sm:flex-row sm:flex-wrap md:flex-nowrap items-stretch justify-center gap-4 text-[var(--club-brown-deep)] w-full max-w-md mx-auto sm:max-w-none"
+    >
+      <div
+        class="flex items-center justify-center gap-2 border border-[var(--club-dark-brown)] text-[var(--club-dark-brown-light)] px-5 py-3 shadow-sm transition hover:bg-[var(--club-sand-light)] hover:text-white hover:shadow-md w-full sm:w-auto font-['Inter'] text-sm"
+      >
+        <i class="fa-solid fa-shield-dog text-[var(--club-brown-deep)]"></i>
+        <span class="font-medium">KVA Certified</span>
+      </div>
+
+      <div
+        class="flex items-center justify-center gap-2 border border-[var(--club-dark-brown)] text-[var(--club-dark-brown-light)] px-5 py-3 shadow-sm transition hover:bg-[var(--club-sand-light)] hover:text-white hover:shadow-md w-full sm:w-auto font-['Inter'] text-sm"
+      >
+        <i class="fa-solid fa-paw text-[var(--club-brown-deep)]"></i>
+        <span class="font-medium">KESCAVA Affiliated</span>
+      </div>
+
+      <div
+        class="flex items-center justify-center gap-2 border border-[var(--club-dark-brown)] text-[var(--club-dark-brown-light)] px-5 py-3 shadow-sm transition hover:bg-[var(--club-sand-light)] hover:text-white hover:shadow-md w-full sm:w-auto font-['Inter'] text-sm"
+      >
+        <i class="fa-solid fa-camera text-[var(--club-brown-deep)]"></i>
+        <span class="font-medium">CCTV Monitoring</span>
+      </div>
+
+      <div
+        class="flex items-center justify-center gap-2 border border-[var(--club-dark-brown)] text-[var(--club-dark-brown-light)] px-5 py-3 shadow-sm transition hover:bg-[var(--club-sand-light)] hover:text-white hover:shadow-md w-full sm:w-auto font-['Inter'] text-sm"
+      >
+        <i class="fa-solid fa-clock text-[var(--club-brown-deep)]"></i>
+        <span class="font-medium">24/7 Supervision</span>
+      </div>
+
+      <div
+        class="flex items-center justify-center gap-2 border border-[var(--club-dark-brown)] text-[var(--club-dark-brown-light)] px-5 py-3 shadow-sm transition hover:bg-[var(--club-sand-light)] hover:text-white hover:shadow-md w-full sm:w-auto font-['Inter'] text-sm"
+      >
+        <i class="fa-solid fa-heart-pulse text-[var(--club-brown-deep)]"></i>
+        <span class="font-medium">On-Call Vet Access</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr />
+
+<!-- BLOG SECTION -->
+<section id="blog" class="py-20 bg-[var(--club-sand-light)/10]">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 text-center">
+    <h2
+      class="text-3xl md:text-4xl font-bold text-[var(--club-dark-brown)] mb-6 font-['Cormorant_Garamond']"
+    >
+      Latest <span class="text-[var(--club-taupe)]">Blog Posts</span>
+    </h2>
+    <p
+      class="text-[var(--club-olive)] max-w-2xl mx-auto mb-12 text-lg font-['Inter'] font-light leading-relaxed"
+    >
+      Stay updated with pet care tips, community stories, and the latest
+      happenings at Fur & Friends.
+    </p>
+
+    <!-- Blog Grid -->
+    <div class="grid gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      <!-- Blog Card 1 -->
+      <div
+        class="group bg-white shadow-md hover:shadow-2xl transition-all duration-500 overflow-hidden border border-[var(--club-taupe)]"
+      >
+        <div class="relative overflow-hidden">
+          <img
+            src="{% static 'core/images/blog1.jpg' %}"
+            alt="Pet Care"
+            class="w-full h-56 object-cover transform group-hover:scale-110 transition duration-700 ease-out"
+          />
+          <div
+            class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-500"
+          ></div>
+        </div>
+        <div class="p-6 text-left">
+          <h3
+            class="text-2xl font-semibold text-[var(--club-dark-brown)] mb-2 font-['Cormorant_Garamond']"
+          >
+            Top 10 Tips for Happy Pets
+          </h3>
+          <p
+            class="text-[var(--club-olive)] mb-6 font-['Inter'] text-base leading-relaxed"
+          >
+            Learn the best practices to keep your furry friends healthy and full
+            of joy.
+          </p>
+          <a
+            href="blog-details.html"
+            class="inline-block bg-[var(--club-rust)] text-white px-5 py-2 font-['Inter'] hover:bg-[var(--club-dark-brown)] transition"
+            >Read More</a
+          >
+        </div>
+      </div>
+
+      <!-- Blog Card 2 -->
+      <div
+        class="group bg-white shadow-md hover:shadow-2xl transition-all duration-500 overflow-hidden border border-[var(--club-taupe)]"
+      >
+        <div class="relative overflow-hidden">
+          <img
+            src="{% static 'core/images/play-time.jpg' %}"
+            alt="Community Event"
+            class="w-full h-56 object-cover transform group-hover:scale-110 transition duration-700 ease-out"
+          />
+          <div
+            class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-500"
+          ></div>
+        </div>
+        <div class="p-6 text-left">
+          <h3
+            class="text-2xl font-semibold text-[var(--club-dark-brown)] mb-2 font-['Cormorant_Garamond']"
+          >
+            Highlights from Our Last Event
+          </h3>
+          <p
+            class="text-[var(--club-olive)] mb-6 font-['Inter'] text-base leading-relaxed"
+          >
+            Catch up on the fun moments from our recent community meetup.
+          </p>
+          <a
+            href="blog-details.html"
+            class="inline-block bg-[var(--club-rust)] text-white px-5 py-2 font-['Inter'] hover:bg-[var(--club-dark-brown)] transition"
+            >Read More</a
+          >
+        </div>
+      </div>
+
+      <!-- Blog Card 3 -->
+      <div
+        class="group bg-white shadow-md hover:shadow-2xl transition-all duration-500 overflow-hidden border border-[var(--club-taupe)]"
+      >
+        <div class="relative overflow-hidden">
+          <img
+            src="{% static 'core/images/blog3.jpg' %}"
+            alt="Pet Health"
+            class="w-full h-56 object-cover transform group-hover:scale-110 transition duration-700 ease-out"
+          />
+          <div
+            class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-500"
+          ></div>
+        </div>
+        <div class="p-6 text-left">
+          <h3
+            class="text-2xl font-semibold text-[var(--club-dark-brown)] mb-2 font-['Cormorant_Garamond']"
+          >
+            Essential Health Checks for Dogs
+          </h3>
+          <p
+            class="text-[var(--club-olive)] mb-6 font-['Inter'] text-base leading-relaxed"
+          >
+            A quick guide to the most important vet checks every dog needs.
+          </p>
+          <a
+            href="blog-details.html"
+            class="inline-block bg-[var(--club-rust)] text-white px-5 py-2 font-['Inter'] hover:bg-[var(--club-dark-brown)] transition"
+            >Read More</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS SECTION -->
+<section id="testimonials" class="py-20 bg-[var(--club-sand)]">
+  <div class="max-w-6xl mx-auto px-4 text-center">
+    <h2
+      class="text-3xl md:text-4xl font-bold text-[var(--club-olive)] mb-12 font-['Cormorant_Garamond']"
+    >
+      What Our Members Say
+    </h2>
+
+    <div class="grid gap-8 md:grid-cols-3">
+      <!-- Testimonial 1 -->
+      <div
+        class="bg-white shadow-lg p-6 flex flex-col hover:shadow-2xl transition"
+      >
+        <p
+          class="text-[var(--club-olive)] italic mb-4 font-['Cormorant_Garamond']"
+        >
+          "ThePetPeople Club has been amazing for me and Max, my dog. He gets to
+          socialize while I connect with other pet lovers!"
+        </p>
+        <span
+          class="text-[var(--club-dark-brown)] font-semibold font-['Inter']"
+        >
+          Sarah Johnson
+        </span>
+      </div>
+
+      <!-- Testimonial 2 -->
+      <div
+        class="bg-white shadow-lg p-6 flex flex-col hover:shadow-2xl transition"
+      >
+        <p
+          class="text-[var(--club-olive)] italic mb-4 font-['Cormorant_Garamond']"
+        >
+          "Finally found a safe and friendly place for my cat Luna. The staff
+          genuinely cares about every type of pet."
+        </p>
+        <span
+          class="text-[var(--club-dark-brown)] font-semibold font-['Inter']"
+        >
+          Mike Chen
+        </span>
+      </div>
+
+      <!-- Testimonial 3 -->
+      <div
+        class="bg-white shadow-lg p-6 flex flex-col hover:shadow-2xl transition"
+      >
+        <p
+          class="text-[var(--club-olive)] italic mb-4 font-['Cormorant_Garamond']"
+        >
+          "Buddy, my iguana, gets the attention he deserves here. The community
+          welcomes exotic pets too — highly recommend!"
+        </p>
+        <span
+          class="text-[var(--club-dark-brown)] font-semibold font-['Inter']"
+        >
+          Emma Davis
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- CONTACT SECTION -->
+<section id="contact" class="py-20 bg-[#fdfaf8]">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <!-- Contact Info -->
+      <div>
+        <h2
+          class="text-3xl md:text-4xl font-bold text-[var(--club-olive)] mb-6 font-['Cormorant_Garamond']"
+        >
+          Get in <span class="text-[var(--club-taupe)]">Touch</span>
+        </h2>
+        <p class="text-gray-700 mb-8 font-['Cormorant_Garamond']">
+          Have questions about membership, events, or scheduling a visit? Reach
+          out to us — we’d love to hear from you!
+        </p>
+
+        <ul class="space-y-4 text-gray-800 font-['Cormorant_Garamond']">
+          <li class="flex items-center">
+            <i class="fa-solid fa-location-dot text-[#cc5410] text-xl w-8"></i>
+            <span>Nairobi, Kenya – Karen Dog Park Rd</span>
+          </li>
+          <li class="flex items-center">
+            <i class="fa-solid fa-phone text-[#cc5410] text-xl w-8"></i>
+            <span>+254 724 855 023</span>
+          </li>
+          <li class="flex items-center">
+            <i class="fa-solid fa-envelope text-[#cc5410] text-xl w-8"></i>
+            <span>info@furandfriendsclub.com</span>
+          </li>
+        </ul>
+
+        <!-- Google Map Embed -->
+        <div class="mt-6">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15955.14278119165!2d36.7090525!3d-1.3175795!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f1a44c0d11b33%3A0x7d1b85f4dc2621af!2sKaren%20Dog%20Park!5e0!3m2!1sen!2ske!4v1695733382000!5m2!1sen!2ske"
+            width="100%"
+            height="200"
+            style="border: 0"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            class="shadow-md"
+          ></iframe>
+        </div>
+
+        <!-- Social Links -->
+        <div class="flex space-x-4 mt-6">
+          <a href="#" class="text-gray-600 hover:text-[#a03c08] text-2xl">
+            <i class="fa-brands fa-facebook"></i>
+          </a>
+          <a href="#" class="text-gray-600 hover:text-[#a03c08] text-2xl">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          <a href="#" class="text-gray-600 hover:text-[#a03c08] text-2xl">
+            <i class="fa-brands fa-twitter"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="bg-white shadow-lg border border-[#f1e5e1] p-8">
+        <form action="#" method="POST" class="space-y-6 font-['Inter']">
+          <!-- Name -->
+          <div class="relative">
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required
+              placeholder=" "
+              class="peer block w-full border border-gray-300 bg-transparent px-4 pt-5 pb-2 text-gray-800 shadow-sm focus:border-[#cc5410] focus:ring-2 focus:ring-[#cc5410] focus:outline-none transition"
+            />
+            <label
+              for="name"
+              class="absolute left-4 top-2 text-gray-500 text-sm transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-2 peer-focus:text-sm peer-focus:text-[#a03c08]"
+            >
+              Name
+            </label>
+          </div>
+
+          <!-- Email -->
+          <div class="relative">
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              placeholder=" "
+              class="peer block w-full border border-gray-300 bg-transparent px-4 pt-5 pb-2 text-gray-800 shadow-sm focus:border-[#cc5410] focus:ring-2 focus:ring-[#cc5410] focus:outline-none transition"
+            />
+            <label
+              for="email"
+              class="absolute left-4 top-2 text-gray-500 text-sm transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-2 peer-focus:text-sm peer-focus:text-[#a03c08]"
+            >
+              Email
+            </label>
+          </div>
+
+          <!-- Message -->
+          <div class="relative">
+            <textarea
+              id="message"
+              name="message"
+              rows="4"
+              required
+              placeholder=" "
+              class="peer block w-full border border-gray-300 bg-transparent px-4 pt-5 pb-2 text-gray-800 shadow-sm focus:border-[#cc5410] focus:ring-2 focus:ring-[#cc5410] focus:outline-none transition"
+            ></textarea>
+            <label
+              for="message"
+              class="absolute left-4 top-2 text-gray-500 text-sm transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-2 peer-focus:text-sm peer-focus:text-[#a03c08]"
+            >
+              Message
+            </label>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full bg-[var(--club-taupe)] hover:bg-[var(--club-sand)] text-white font-semibold py-3 px-6 shadow-md transition transform hover:scale-105 font-['Inter']"
+          >
+            Send Message
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
