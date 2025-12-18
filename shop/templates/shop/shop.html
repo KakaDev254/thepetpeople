@@ -1,18 +1,17 @@
 {% extends "main/base.html" %} {% load static %} {% block title %}Shop - The Pet
 People{% endblock %} {% block content %}
+
 <!-- HERO SECTION -->
 <section
   class="relative pt-32 pb-16 text-center mt-[80px] bg-[var(--club-taupe-light)]"
 >
-  <div class="relative z-10">
+  <div class="relative z-10 max-w-3xl mx-auto px-6">
     <h1
-      class="text-4xl sm:text-5xl md:text-5xl font-normal font-['Cinzel'] text-[var(--club-dark-brown)] mb-3"
+      class="text-4xl sm:text-5xl font-['Cinzel'] text-[var(--club-dark-brown)] mb-3"
     >
       Our <span class="text-[var(--club-rust-light)]">Shop</span>
     </h1>
-    <p
-      class="text-[var(--club-olive-light)] text-md md:text-lg max-w-2xl mx-auto"
-    >
+    <p class="text-[var(--club-olive-light)] text-md md:text-lg">
       Find everything your furry friend deserves.
     </p>
   </div>
@@ -22,7 +21,7 @@ People{% endblock %} {% block content %}
 <section id="shop" class="pt-20 pb-20 bg-white">
   <div class="max-w-7xl mx-auto px-6 lg:px-8 text-center">
     <h2
-      class="text-4xl md:text-5xl font-bold text-[var(--club-dark-brown)] mb-10 font-['Playfair_Display']"
+      class="text-4xl md:text-5xl font-['Playfair_Display'] text-[var(--club-dark-brown)] mb-12"
     >
       Featured <span class="text-[var(--club-rust-light)]">Products</span>
     </h2>
@@ -30,44 +29,48 @@ People{% endblock %} {% block content %}
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
       {% for product in products %}
       <div
-        class="bg-white border border-[var(--club-sand-light)] rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden flex flex-col"
+        class="bg-white border border-[var(--club-sand-light)] rounded-2xl shadow-sm hover:shadow-lg transition duration-300 overflow-hidden flex flex-col group"
       >
+        <!-- PRODUCT IMAGE -->
         <div
-          class="w-full h-[300px] overflow-hidden flex items-center justify-center bg-[var(--club-sand-light)]"
+          class="w-full h-[300px] bg-[var(--club-sand-light)] overflow-hidden flex items-center justify-center"
         >
           {% if product.image %}
           <img
-            src="{{ product.image.url }}"
+            src="{{ product.image.url }}?q=auto&f=auto"
             alt="{{ product.name }}"
-            class="w-full h-full object-cover object-center"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            loading="lazy"
           />
           {% else %}
           <img
             src="{% static 'core/images/no-image.jpg' %}"
             alt="No image available"
-            class="w-full h-full object-cover object-center"
+            class="w-full h-full object-cover"
           />
           {% endif %}
         </div>
 
+        <!-- PRODUCT INFO -->
         <div class="p-6 text-left flex flex-col flex-1">
           <h3
             class="text-lg font-semibold text-[var(--club-dark-brown)] font-['Montserrat'] mb-1"
           >
             {{ product.name }}
           </h3>
-          <p
-            class="text-[var(--club-dark-brown-light)] text-sm mt-1 flex-1 line-clamp-2"
-          >
-            {{ product.description|truncatewords:15 }}
+
+          <p class="text-[var(--club-dark-brown-light)] text-sm mt-1 flex-1">
+            {{ product.description|striptags|truncatewords:15 }}
           </p>
-          <div class="flex items-center justify-between mt-4">
+
+          <div class="flex items-center justify-between mt-5">
             <span class="text-[var(--club-rust)] font-bold text-lg">
               ${{ product.price }}
             </span>
+
             <a
               href="{% url 'add_to_cart' product.id %}"
-              class="bg-[var(--club-rust-light)] hover:bg-[var(--club-rust)] text-white px-4 py-2 rounded-md text-sm font-semibold transition"
+              class="bg-[var(--club-rust-light)] hover:bg-[var(--club-rust)] text-white px-5 py-2 rounded-md text-sm font-semibold transition"
             >
               Add to Cart
             </a>
@@ -75,11 +78,12 @@ People{% endblock %} {% block content %}
         </div>
       </div>
       {% empty %}
-      <p class="text-[var(--club-dark-brown-light)] col-span-full text-lg">
+      <p class="col-span-full text-[var(--club-dark-brown-light)] text-lg">
         No products available yet.
       </p>
       {% endfor %}
     </div>
   </div>
 </section>
+
 {% endblock %}

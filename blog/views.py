@@ -2,9 +2,21 @@ from django.shortcuts import render, get_object_or_404
 from .models import Post
 
 def post_list(request):
-    posts = Post.objects.filter(published=True)
+    posts = Post.objects.filter(published=True).order_by('-created_at')
     return render(request, 'blog/post_list.html', {'posts': posts})
 
+
 def post_detail(request, slug):
-    post = get_object_or_404(Post, slug=slug)
-    return render(request, 'blog/post_detail.html', {'post': post})
+    post = get_object_or_404(Post, slug=slug, published=True)
+
+    recent_posts = (
+        Post.objects
+        .filter(published=True)
+        .exclude(id=post.id)
+        .order_by('-created_at')[:5]
+    )
+
+    return render(request, 'blog/post_detail.html', {
+        'post': post,
+        'recent_posts': recent_posts,
+    })

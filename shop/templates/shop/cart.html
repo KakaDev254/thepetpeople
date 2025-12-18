@@ -1,38 +1,72 @@
 {% extends "main/base.html" %} {% load static %} {% block title %}Your Cart -
 The Pet People{% endblock %} {% block content %}
 <section class="pt-32 pb-20 px-6">
-  <div class="max-w-5xl mx-auto">
+  <div class="max-w-6xl mx-auto">
     <h2
-      class="text-4xl font-bold text-[var(--club-dark-brown)] mb-8 text-center"
+      class="text-4xl font-['Cinzel'] text-center text-[var(--club-dark-brown)] mb-10"
     >
       Your <span class="text-[var(--club-rust)]">Cart</span>
     </h2>
 
     {% if items %}
-    <div class="bg-white shadow-md rounded-lg overflow-hidden">
-      <table class="w-full text-left">
+    <div class="overflow-x-auto bg-white shadow-md rounded-xl">
+      <table class="w-full text-left text-sm">
         <thead class="bg-[var(--club-olive)] text-white">
           <tr>
-            <th class="py-3 px-4">Product</th>
-            <th class="py-3 px-4">Price</th>
-            <th class="py-3 px-4">Quantity</th>
-            <th class="py-3 px-4">Subtotal</th>
-            <th class="py-3 px-4"></th>
+            <th class="py-4 px-4">Product</th>
+            <th class="py-4 px-4">Price</th>
+            <th class="py-4 px-4">Qty</th>
+            <th class="py-4 px-4">Subtotal</th>
+            <th class="py-4 px-4"></th>
           </tr>
         </thead>
+
         <tbody>
           {% for item in items %}
-          <tr class="border-b hover:bg-gray-50">
-            <td class="py-3 px-4">{{ item.product.name }}</td>
-            <td class="py-3 px-4">${{ item.product.price }}</td>
-            <td class="py-3 px-4">{{ item.quantity }}</td>
-            <td class="py-3 px-4">${{ item.get_subtotal }}</td>
-            <td class="py-3 px-4">
+          <tr class="border-b hover:bg-gray-50 transition">
+            <!-- PRODUCT -->
+            <td class="py-4 px-4">
+              <div class="flex items-center gap-4">
+                {% if item.product.image %}
+                <img
+                  src="{{ item.product.image.url }}?q=auto&f=auto"
+                  alt="{{ item.product.name }}"
+                  class="w-14 h-14 rounded-md object-cover"
+                  loading="lazy"
+                />
+                {% else %}
+                <img
+                  src="{% static 'core/images/placeholder.webp' %}"
+                  alt="{{ item.product.name }}"
+                  class="w-14 h-14 rounded-md object-cover"
+                />
+                {% endif %}
+
+                <span class="font-medium text-[var(--club-dark-brown)]">
+                  {{ item.product.name }}
+                </span>
+              </div>
+            </td>
+
+            <!-- PRICE -->
+            <td class="py-4 px-4">${{ item.product.price }}</td>
+
+            <!-- QUANTITY -->
+            <td class="py-4 px-4">{{ item.quantity }}</td>
+
+            <!-- SUBTOTAL -->
+            <td class="py-4 px-4 font-semibold text-[var(--club-dark-brown)]">
+              ${{ item.get_subtotal }}
+            </td>
+
+            <!-- REMOVE -->
+            <td class="py-4 px-4">
               <a
                 href="{% url 'remove_from_cart' item.id %}"
                 class="text-red-600 hover:underline"
-                >Remove</a
               >
+                Remove
+              </a>
             </td>
           </tr>
           {% endfor %}
@@ -40,20 +74,33 @@ The Pet People{% endblock %} {% block content %}
       </table>
     </div>
 
-    <div class="mt-8 flex justify-between items-center">
+    <!-- CART SUMMARY -->
+    <div
+      class="mt-10 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-6"
+    >
       <p class="text-xl font-semibold text-[var(--club-dark-brown)]">
-        Total: <span class="text-[var(--club-rust)]">${{ total }}</span>
+        Total:
+        <span class="text-[var(--club-rust)]"> ${{ total }} </span>
       </p>
+
       <a
         href="{% url 'checkout' %}"
-        class="bg-[var(--club-rust)] hover:bg-[var(--club-dark-brown)] text-white px-6 py-3 rounded-md font-semibold transition"
+        class="inline-flex items-center justify-center bg-[var(--club-rust)] hover:bg-[var(--club-dark-brown)] text-white px-8 py-3 rounded-lg font-semibold transition"
       >
-        Proceed to Checkout
+        Proceed to Checkout →
       </a>
     </div>
 
     {% else %}
-    <p class="text-gray-600 text-center">Your cart is empty.</p>
+    <div class="text-center py-20">
+      <p class="text-gray-600 text-lg mb-6">Your cart is currently empty.</p>
+      <a
+        href="{% url 'shop' %}"
+        class="inline-block bg-[var(--club-rust)] hover:bg-[var(--club-dark-brown)] text-white px-6 py-3 rounded-lg transition"
+      >
+        Continue Shopping
+      </a>
+    </div>
     {% endif %}
   </div>
 </section>

@@ -8,55 +8,48 @@ Pet People{% endblock %} {% block content %}
     muted
     loop
     playsinline
-    class="absolute top-0 left-0 w-full h-full object-cover z-0"
+    class="absolute inset-0 w-full h-full object-cover z-0"
   >
     <source src="{% static 'core/videos/vid2.mp4' %}" type="video/mp4" />
-    <img
-      src="{% static 'core/images/hero-placeholder.jpg' %}"
-      alt="Hero Background"
-    />
   </video>
 
-  <div class="absolute top-0 left-0 w-full h-full bg-black/40 z-0"></div>
+  <div class="absolute inset-0 bg-black/40 z-0"></div>
 
   <div
     class="relative z-10 flex flex-col items-center justify-center h-full text-center px-6"
   >
-    <h1
-      class="text-4xl sm:text-5xl md:text-5xl font-normal font-['Cinzel'] text-white mb-3"
-    >
+    <h1 class="text-4xl sm:text-5xl font-['Cinzel'] text-white mb-3">
       Our <span class="text-[var(--club-sand-light)]">Gallery</span>
     </h1>
-    <p class="text-white/80 text-md md:text-lg max-w-3xl mb-6">
+    <p class="text-white/80 text-md md:text-lg max-w-3xl">
       Explore the joyful moments of pets and their humans.
     </p>
   </div>
 </section>
 
 <!-- GALLERY GRID -->
-<section id="gallery" class="pt-24 pb-20 bg-[var(--club-sand-light)]">
-  <div class="max-w-7xl mx-auto px-6 lg:px-8 text-center">
-    <h2
-      class="text-3xl font-semibold text-[var(--club-dark-brown)] mb-10 font-['Cinzel']"
-    >
+<section class="pt-24 pb-20 bg-[var(--club-sand-light)]">
+  <div class="max-w-7xl mx-auto px-6 text-center">
+    <h2 class="text-3xl font-['Cinzel'] text-[var(--club-dark-brown)] mb-12">
       Capturing <span class="text-[var(--club-rust)]">Moments</span> of Joy
     </h2>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {% for image in images %}
       <div
-        class="relative w-full overflow-hidden rounded-lg shadow-md bg-[var(--club-taupe-light)] hover:shadow-lg transition-shadow duration-300"
+        class="relative w-full overflow-hidden rounded-xl shadow-md bg-[var(--club-taupe-light)] hover:shadow-lg transition"
         style="padding-top: 75%"
       >
         <img
-          src="{{ image.image.url }}"
+          src="{{ image.image.url }}?q=auto&f=auto"
           alt="{{ image.title }}"
-          class="absolute top-0 left-0 w-full h-full object-cover hover:scale-105 transition-transform duration-300 cursor-pointer"
-          onclick="openLightbox('{{ image.image.url }}')"
+          class="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-300 cursor-pointer"
+          loading="lazy"
+          onclick="openLightbox('{{ image.image.url|escapejs }}')"
         />
       </div>
       {% empty %}
-      <p class="text-[var(--club-dark-brown-light)] text-lg">
+      <p class="col-span-full text-[var(--club-dark-brown-light)] text-lg">
         No images available yet.
       </p>
       {% endfor %}
@@ -67,18 +60,19 @@ Pet People{% endblock %} {% block content %}
 <!-- LIGHTBOX -->
 <div
   id="lightbox"
-  class="fixed inset-0 bg-black/80 flex items-center justify-center hidden z-50"
+  class="fixed inset-0 bg-black/80 hidden z-50 flex items-center justify-center px-4"
 >
   <button
     onclick="closeLightbox()"
-    class="absolute top-5 right-5 text-white text-4xl font-bold hover:text-[var(--club-sand-light)] transition"
+    class="absolute top-5 right-5 text-white text-4xl hover:text-[var(--club-sand-light)] transition"
   >
     &times;
   </button>
+
   <img
     id="lightbox-img"
     src=""
-    class="max-h-[80vh] max-w-[90vw] rounded-lg shadow-2xl border-4 border-[var(--club-sand-light)]"
+    class="max-h-[85vh] max-w-[95vw] rounded-xl shadow-2xl border-4 border-[var(--club-sand-light)]"
   />
 </div>
 
@@ -93,6 +87,11 @@ Pet People{% endblock %} {% block content %}
   function closeLightbox() {
     document.getElementById("lightbox").classList.add("hidden");
   }
+
+  // Close on ESC key
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") closeLightbox();
+  });
 </script>
 
 {% endblock %}

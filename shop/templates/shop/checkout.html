@@ -1,40 +1,65 @@
 {% extends "main/base.html" %} {% load static %} {% block title %}Checkout - The
 Pet People{% endblock %} {% block content %}
-<section class="pt-32 pb-20 px-6 lg:px-8 max-w-4xl mx-auto">
-  <h1 class="text-4xl font-bold text-[var(--club-dark-brown)] mb-8">
-    Checkout
-  </h1>
+<section class="pt-32 pb-20 px-6 lg:px-8">
+  <div class="max-w-4xl mx-auto">
+    <h1
+      class="text-4xl font-['Cinzel'] text-[var(--club-dark-brown)] mb-10 text-center"
+    >
+      Checkout
+    </h1>
 
-  {% if cart.items.all %}
-  <div class="bg-white p-6 rounded-lg shadow-md">
-    <h2 class="text-xl font-semibold mb-4">Order Summary</h2>
+    {% if cart.items.all %}
+    <div class="bg-white rounded-xl shadow-md overflow-hidden">
+      <!-- ORDER SUMMARY -->
+      <div class="p-6 border-b">
+        <h2 class="text-xl font-semibold text-[var(--club-dark-brown)] mb-4">
+          Order Summary
+        </h2>
 
-    <ul class="divide-y divide-gray-200 mb-4">
-      {% for item in cart.items.all %}
-      <li class="py-2 flex justify-between">
-        <span>{{ item.product.name }} × {{ item.quantity }}</span>
-        <span>${{ item.get_subtotal }}</span>
-      </li>
-      {% endfor %}
-    </ul>
+        <ul class="divide-y">
+          {% for item in cart.items.all %}
+          <li class="py-4 flex justify-between text-sm">
+            <span class="text-[var(--club-dark-brown)]">
+              {{ item.product.name }}
+              <span class="text-gray-500">× {{ item.quantity }}</span>
+            </span>
+            <span class="font-medium"> ${{ item.get_subtotal }} </span>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
 
-    <div class="flex justify-between font-bold text-lg mb-6">
-      <span>Total:</span>
-      <span>${{ total }}</span>
+      <!-- TOTAL -->
+      <div class="p-6 flex justify-between items-center text-lg font-semibold">
+        <span>Total</span>
+        <span class="text-[var(--club-rust)]">${{ total }}</span>
+      </div>
+
+      <!-- ACTION -->
+      <div class="p-6 border-t">
+        <form method="POST" action="{% url 'checkout' %}">
+          {% csrf_token %}
+          <button
+            type="submit"
+            class="w-full bg-[var(--club-rust)] hover:bg-[var(--club-dark-brown)] text-white py-3 rounded-lg font-semibold transition"
+          >
+            Confirm Order
+          </button>
+        </form>
+      </div>
     </div>
 
-    <form method="POST" action="{% url 'checkout' %}">
-      {% csrf_token %}
-      <button
-        type="submit"
-        class="bg-[var(--club-rust)] hover:bg-[var(--club-dark-brown)] text-white px-6 py-3 rounded-md w-full transition font-semibold"
+    {% else %}
+    <div class="text-center py-20">
+      <p class="text-gray-600 text-lg mb-6">Your cart is empty.</p>
+      <a
+        href="{% url 'shop' %}"
+        class="inline-block bg-[var(--club-rust)] hover:bg-[var(--club-dark-brown)] text-white px-6 py-3 rounded-lg transition"
       >
-        Confirm Order
-      </button>
-    </form>
+        Continue Shopping
+      </a>
+    </div>
+    {% endif %}
   </div>
-  {% else %}
-  <p class="text-gray-600">Your cart is empty.</p>
-  {% endif %}
 </section>
 {% endblock %}
