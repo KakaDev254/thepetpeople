@@ -1,70 +1,83 @@
 {% extends "main/base.html" %} {% load static %} {% block title %}{{ post.title
 }} - The Pet People{% endblock %} {% block content %}
 
-<!-- HERO -->
-<section class="mt-[80px] bg-[var(--club-taupe-light)] py-16">
-  <div class="max-w-4xl mx-auto px-6 text-center">
-    <h1 class="text-4xl sm:text-5xl font-['Cinzel'] text-white leading-tight">
+<!-- HERO WITH IMAGE -->
+<section class="relative mt-[80px]">
+  {% if post.featured_image %}
+  <div class="absolute inset-0">
+    <img
+      src="{{ post.featured_image.url }}?q=auto&f=auto"
+      alt="{{ post.title }}"
+      class="w-full h-full object-cover"
+    />
+    <div class="absolute inset-0 bg-black/60"></div>
+  </div>
+  {% else %}
+  <div class="absolute inset-0 bg-[var(--club-taupe-light)]"></div>
+  {% endif %}
+
+  <div class="relative max-w-5xl mx-auto px-6 py-32 text-center text-white">
+    <h1 class="text-4xl sm:text-5xl font-['Cinzel'] leading-tight mb-4">
       {{ post.title }}
     </h1>
-    <p class="mt-3 text-sm text-[var(--club-sand-light)]">
-      By {{ post.author }} • {{ post.created_at|date:"F j, Y" }}
+    <p class="text-sm tracking-wide text-[var(--club-sand-light)] uppercase">
+      {{ post.author }} · {{ post.created_at|date:"F j, Y" }}
     </p>
   </div>
 </section>
 
-<!-- CONTENT -->
-<section class="max-w-7xl mx-auto px-6 py-20 text-left">
-  <!-- 75 / 25 GRID -->
-  <div class="grid grid-cols-1 lg:grid-cols-[3fr_1fr] gap-14 items-start">
-    <!-- POST CONTENT (75%) -->
-    <article>
-      {% if post.featured_image %}
-      <img
-        src="{{ post.featured_image.url }}?q=auto&f=auto"
-        alt="{{ post.title }}"
-        class="w-full h-[420px] object-cover rounded-2xl mb-10"
-        loading="lazy"
-      />
-      {% endif %}
-
-      <div
-        class="prose prose-lg max-w-none prose-headings:font-['Cinzel'] prose-headings:text-[var(--club-dark-brown)] prose-p:text-[var(--club-dark-brown)] prose-a:text-[var(--club-rust)] hover:prose-a:underline leading-relaxed"
+<!-- MAIN CONTENT -->
+<section class="bg-[var(--club-sand-light)]">
+  <div class="max-w-7xl mx-auto px-6 py-24">
+    <div class="grid grid-cols-1 lg:grid-cols-[3fr_1fr] gap-16">
+      <!-- ARTICLE -->
+      <article
+        class="bg-white rounded-3xl shadow-sm p-8 sm:p-12 -mt-40 relative z-10"
       >
-        {{ post.content|safe }}
-      </div>
+        <div
+          class="prose prose-lg max-w-none prose-headings:font-['Cinzel'] prose-headings:text-[var(--club-dark-brown)] prose-p:text-[var(--club-dark-brown)] prose-a:text-[var(--club-rust)] hover:prose-a:underline leading-relaxed"
+        >
+          {{ post.content|safe }}
+        </div>
 
-      <a
-        href="{% url 'post_list' %}"
-        class="inline-flex items-center mt-12 px-6 py-3 border border-[var(--club-rust)] text-[var(--club-rust)] rounded-full hover:bg-[var(--club-rust)] hover:text-white transition"
-      >
-        ← Back to Blog
-      </a>
-    </article>
+        <!-- DIVIDER -->
+        <div class="my-14 border-t border-[var(--club-sand)]"></div>
 
-    <!-- SIDEBAR (25%) -->
-    <aside class="lg:sticky lg:top-28 h-fit">
-      <div class="pl-6 border-l-2 border-[var(--club-sand)]">
-        <h3 class="text-lg font-semibold text-[var(--club-dark-brown)] mb-6">
-          Recent Posts
-        </h3>
+        <!-- BACK -->
+        <a
+          href="{% url 'post_list' %}"
+          class="inline-flex items-center gap-2 text-sm text-[var(--club-rust)] hover:underline"
+        >
+          ← Back to Blog
+        </a>
+      </article>
 
-        <ul class="space-y-5 text-sm">
-          {% for recent in recent_posts %}
-          <li>
-            <a
-              href="{{ recent.get_absolute_url }}"
-              class="block leading-snug {% if recent.id == post.id %} text-[var(--club-rust)] font-semibold {% else %} hover:text-[var(--club-rust)] {% endif %} transition"
-            >
-              {{ recent.title }}
-            </a>
-          </li>
-          {% empty %}
-          <li class="text-[var(--club-olive-light)]">No recent posts</li>
-          {% endfor %}
-        </ul>
-      </div>
-    </aside>
+      <!-- SIDEBAR -->
+      <aside class="lg:sticky lg:top-32 h-fit">
+        <div class="bg-white rounded-2xl shadow-sm p-6">
+          <h3
+            class="text-sm font-semibold uppercase tracking-wider text-[var(--club-dark-brown)] mb-6"
+          >
+            Recent Posts
+          </h3>
+
+          <ul class="space-y-4 text-sm">
+            {% for recent in recent_posts %}
+            <li>
+              <a
+                href="{{ recent.get_absolute_url }}"
+                class="block leading-snug transition {% if recent.id == post.id %} text-[var(--club-rust)] font-semibold {% else %} text-[var(--club-olive-light)] hover:text-[var(--club-rust)] {% endif %}"
+              >
+                {{ recent.title }}
+              </a>
+            </li>
+            {% empty %}
+            <li class="text-[var(--club-olive-light)]">No recent posts</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </aside>
+    </div>
   </div>
 </section>
 
