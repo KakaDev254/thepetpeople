@@ -1,3 +1,4 @@
+{% load static %}
 <header id="header" class="fixed w-full z-30 top-0 left-0">
   <!-- INFO BAR -->
   <div
@@ -54,73 +55,85 @@
   </div>
 
   <!-- NAVBAR -->
+  <!-- NAVBAR -->
   <nav
     id="navbar"
     role="navigation"
     aria-label="Main navigation"
-    class="navbar w-full bg-white shadow-sm"
+    class="navbar w-full bg-white shadow-sm fixed top-0 z-50"
   >
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between h-16 items-center">
-        <!-- Logo -->
+        <!-- LOGO -->
         <a href="{% url 'home' %}" class="flex items-center gap-3">
-          <div
-            class="w-10 h-10 rounded-full bg-[var(--club-sand-light)] flex items-center justify-center text-[var(--club-dark-brown)] font-bold"
-          >
-            TPP
-          </div>
-          <div>
-            <div class="text-sm font-medium">ThePetPeople</div>
-            <div class="text-xs text-gray-500">Care • Groom • Love</div>
+          <!-- Logo Image -->
+          <img
+            src="{% static 'images/logo.jpg' %}"
+            alt="The Pet People Logo"
+            class="h-10 w-10 md:h-12 md:w-12 object-contain"
+          />
+
+          <!-- Brand Text -->
+          <div class="leading-tight">
+            <div class="text-sm font-medium text-[var(--club-dark-brown)]">
+              ThePetPeople
+            </div>
+            <div class="text-xs text-gray-500 hidden sm:block">
+              Care • Groom • Love
+            </div>
           </div>
         </a>
 
-        <!-- Desktop links -->
+        <!-- DESKTOP LINKS -->
         <div class="hidden md:flex items-center space-x-6 font-['Inter']">
           {% if request.resolver_match.url_name != 'home' %}
-          <!-- HOME LINK -->
           <a
             href="{% url 'home' %}"
             class="nav-link text-[var(--club-brown-deep)] hover:text-[var(--club-sand)]"
-            >Home</a
           >
+            Home
+          </a>
           {% endif %}
 
           <a
-            href="#membership"
-            class="nav-link text-[var(--club-brown-deep)] hover:text-[var(--club-sand)]"
-            >Membership</a
-          >
-          <a
             href="{% url 'gallery' %}"
             class="nav-link text-[var(--club-brown-deep)] hover:text-[var(--club-sand)]"
-            >Gallery</a
           >
+            Gallery
+          </a>
+
           <a
             href="{% url 'event_list' %}"
             class="nav-link text-[var(--club-brown-deep)] hover:text-[var(--club-sand)]"
-            >Events</a
           >
+            Events
+          </a>
+
           <a
             href="#contact"
             class="nav-link text-[var(--club-brown-deep)] hover:text-[var(--club-sand)]"
-            >Contact</a
           >
+            Contact
+          </a>
+
           <a
             href="{% url 'post_list' %}"
             class="nav-link text-[var(--club-brown-deep)] hover:text-[var(--club-sand)]"
-            >Blogs</a
           >
+            Blogs
+          </a>
+
           <a
             href="{% url 'shop' %}"
             class="nav-link text-[var(--club-brown-deep)] hover:text-[var(--club-sand)]"
-            >Shop</a
           >
+            Shop
+          </a>
         </div>
 
-        <!-- Right-side actions -->
+        <!-- RIGHT ACTIONS (DESKTOP) -->
         <div class="hidden md:flex items-center space-x-4 font-['Montserrat']">
-          <!-- 🛒 Cart Icon -->
+          <!-- CART -->
           <a
             href="{% url 'view_cart' %}"
             class="relative text-[var(--club-dark-brown)] hover:text-[var(--club-rust)] transition"
@@ -136,32 +149,31 @@
             {% endif %}
           </a>
 
-          <!-- Login Button -->
+          <!-- LOGIN -->
           <a
             href="#"
-            class="inline-block bg-[var(--club-sand-light)] hover:bg-[var(--club-dark-brown)] text-white tracking-wide uppercase py-2.5 px-6 transition duration-300 nav-btn"
+            class="inline-block bg-[var(--club-sand-light)] hover:bg-[var(--club-dark-brown)] text-white tracking-wide uppercase py-2.5 px-6 transition duration-300"
             style="border-radius: 0"
           >
             Login
           </a>
         </div>
 
-        <!-- Mobile button -->
+        <!-- MOBILE MENU BUTTON -->
         <button
           id="mobile-menu-button"
           type="button"
           aria-controls="mobile-menu"
           aria-expanded="false"
-          class="md:hidden p-2 rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white"
+          class="md:hidden p-2 rounded focus:outline-none"
         >
           <svg
             id="hamburger-icon"
-            class="h-6 w-6 block text-white"
+            class="h-6 w-6 block"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             stroke="var(--club-sand)"
-            aria-hidden="true"
           >
             <path
               stroke-linecap="round"
@@ -170,14 +182,14 @@
               d="M4 6h16M4 12h16M4 18h16"
             />
           </svg>
+
           <svg
             id="close-icon"
-            class="h-6 w-6 hidden text-white"
+            class="h-6 w-6 hidden"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             stroke="var(--club-sand)"
-            aria-hidden="true"
           >
             <path
               stroke-linecap="round"
@@ -190,66 +202,70 @@
       </div>
     </div>
 
-    <!-- Mobile menu -->
-    <div
-      id="mobile-menu"
-      class="hidden md:hidden bg-white border-t"
-      aria-hidden="true"
-    >
+    <!-- MOBILE MENU -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
       <div class="px-4 pb-4 pt-2 space-y-1 font-['Inter']">
         {% if request.resolver_match.url_name != 'home' %}
-        <!-- HOME LINK (Mobile) -->
         <a
           href="{% url 'home' %}"
-          class="block px-3 py-2 rounded text-[var(--club-brown-deep)] hover:bg-gray-100"
-          >Home</a
+          class="block px-3 py-2 rounded hover:bg-gray-100"
         >
+          Home
+        </a>
         {% endif %}
 
         <a
           href="{% url 'gallery' %}"
-          class="block px-3 py-2 rounded text-[var(--club-brown-deep)] hover:bg-gray-100"
-          >Gallery</a
+          class="block px-3 py-2 rounded hover:bg-gray-100"
         >
+          Gallery
+        </a>
+
         <a
           href="{% url 'event_list' %}"
-          class="block px-3 py-2 rounded text-[var(--club-brown-deep)] hover:bg-gray-100"
-          >Events</a
+          class="block px-3 py-2 rounded hover:bg-gray-100"
         >
-        <a
-          href="#contact"
-          class="block px-3 py-2 rounded text-[var(--club-brown-deep)] hover:bg-gray-100"
-          >Contact</a
-        >
+          Events
+        </a>
+
+        <a href="#contact" class="block px-3 py-2 rounded hover:bg-gray-100">
+          Contact
+        </a>
+
         <a
           href="{% url 'post_list' %}"
-          class="block px-3 py-2 rounded text-[var(--club-brown-deep)] hover:bg-gray-100"
-          >Blogs</a
+          class="block px-3 py-2 rounded hover:bg-gray-100"
         >
+          Blogs
+        </a>
+
         <a
           href="{% url 'shop' %}"
-          class="block px-3 py-2 rounded text-[var(--club-brown-deep)] hover:bg-gray-100"
-          >Shop</a
+          class="block px-3 py-2 rounded hover:bg-gray-100"
         >
+          Shop
+        </a>
 
-        <!-- 🛒 Cart Icon (Mobile) -->
+        <!-- CART (MOBILE) -->
         <a
           href="{% url 'view_cart' %}"
-          class="flex items-center gap-2 text-[var(--club-brown-deep)] hover:text-[var(--club-rust)] px-3 py-2 rounded"
+          class="flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-100"
         >
-          <i class="bx bx-cart text-xl"></i> View Cart {% if cart_item_count %}
+          <i class="bx bx-cart text-xl"></i>
+          View Cart {% if cart_item_count %}
           <span
-            class="ml-1 bg-[var(--club-rust)] text-white text-xs font-bold px-1.5 py-0.5 rounded-full"
-            >{{ cart_item_count }}</span
+            class="bg-[var(--club-rust)] text-white text-xs font-bold px-1.5 py-0.5 rounded-full"
           >
+            {{ cart_item_count }}
+          </span>
           {% endif %}
         </a>
 
+        <!-- LOGIN (MOBILE) -->
         <div class="pt-2">
           <a
             href="#"
-            class="block bg-[var(--club-sand-light)] hover:bg-[var(--club-dark-brown)] text-white tracking-wide uppercase py-2.5 px-6 text-center transition duration-300"
-            style="border-radius: 0"
+            class="block bg-[var(--club-sand-light)] hover:bg-[var(--club-dark-brown)] text-white uppercase py-2.5 px-6 text-center transition"
           >
             Login
           </a>
