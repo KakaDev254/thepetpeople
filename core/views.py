@@ -2,9 +2,18 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import BookingForm
 from .models import SERVICE_FEES
+from blog.models import Post
 
 def home(request):
-    return render(request, "core/home.html")
+    recent_posts = (
+        Post.objects
+        .filter(published=True)
+        .order_by('-created_at')[:3]
+    )
+
+    return render(request, "core/home.html", {
+        "recent_posts": recent_posts
+    })
 
 
 def book_service(request):

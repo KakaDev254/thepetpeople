@@ -832,6 +832,7 @@ ThePetPeople{% endblock %} {% block content %}
     >
       Latest <span class="text-[var(--club-taupe)]">Blog Posts</span>
     </h2>
+
     <p
       class="text-[var(--club-olive)] max-w-2xl mx-auto mb-12 text-lg font-['Inter'] font-light leading-relaxed"
     >
@@ -841,105 +842,59 @@ ThePetPeople{% endblock %} {% block content %}
 
     <!-- Blog Grid -->
     <div class="grid gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-      <!-- Blog Card 1 -->
+      {% for post in recent_posts %}
       <div
         class="group bg-white shadow-md hover:shadow-2xl transition-all duration-500 overflow-hidden border border-[var(--club-taupe)]"
       >
+        <!-- Image -->
         <div class="relative overflow-hidden">
+          {% if post.featured_image %}
           <img
-            src="{% static 'core/images/blog1.jpg' %}"
-            alt="Pet Care"
+            src="{{ post.featured_image.url }}?q=auto&f=auto"
+            alt="{{ post.title }}"
             class="w-full h-56 object-cover transform group-hover:scale-110 transition duration-700 ease-out"
+            loading="lazy"
           />
-          <div
-            class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-500"
-          ></div>
-        </div>
-        <div class="p-6 text-left">
-          <h3
-            class="text-2xl font-semibold text-[var(--club-dark-brown)] mb-2 font-['Cormorant_Garamond']"
-          >
-            Top 10 Tips for Happy Pets
-          </h3>
-          <p
-            class="text-[var(--club-olive)] mb-6 font-['Inter'] text-base leading-relaxed"
-          >
-            Learn the best practices to keep your furry friends healthy and full
-            of joy.
-          </p>
-          <a
-            href="blog-details.html"
-            class="inline-block bg-[var(--club-rust)] text-white px-5 py-2 font-['Inter'] hover:bg-[var(--club-dark-brown)] transition"
-            >Read More</a
-          >
-        </div>
-      </div>
+          {% else %}
+          <img
+            src="{% static 'core/images/blog-placeholder.jpg' %}"
+            alt="{{ post.title }}"
+            class="w-full h-56 object-cover"
+          />
+          {% endif %}
 
-      <!-- Blog Card 2 -->
-      <div
-        class="group bg-white shadow-md hover:shadow-2xl transition-all duration-500 overflow-hidden border border-[var(--club-taupe)]"
-      >
-        <div class="relative overflow-hidden">
-          <img
-            src="{% static 'core/images/play-time.jpg' %}"
-            alt="Community Event"
-            class="w-full h-56 object-cover transform group-hover:scale-110 transition duration-700 ease-out"
-          />
           <div
             class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-500"
           ></div>
         </div>
-        <div class="p-6 text-left">
-          <h3
-            class="text-2xl font-semibold text-[var(--club-dark-brown)] mb-2 font-['Cormorant_Garamond']"
-          >
-            Highlights from Our Last Event
-          </h3>
-          <p
-            class="text-[var(--club-olive)] mb-6 font-['Inter'] text-base leading-relaxed"
-          >
-            Catch up on the fun moments from our recent community meetup.
-          </p>
-          <a
-            href="blog-details.html"
-            class="inline-block bg-[var(--club-rust)] text-white px-5 py-2 font-['Inter'] hover:bg-[var(--club-dark-brown)] transition"
-            >Read More</a
-          >
-        </div>
-      </div>
 
-      <!-- Blog Card 3 -->
-      <div
-        class="group bg-white shadow-md hover:shadow-2xl transition-all duration-500 overflow-hidden border border-[var(--club-taupe)]"
-      >
-        <div class="relative overflow-hidden">
-          <img
-            src="{% static 'core/images/blog3.jpg' %}"
-            alt="Pet Health"
-            class="w-full h-56 object-cover transform group-hover:scale-110 transition duration-700 ease-out"
-          />
-          <div
-            class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-500"
-          ></div>
-        </div>
+        <!-- Content -->
         <div class="p-6 text-left">
           <h3
             class="text-2xl font-semibold text-[var(--club-dark-brown)] mb-2 font-['Cormorant_Garamond']"
           >
-            Essential Health Checks for Dogs
+            {{ post.title }}
           </h3>
+
           <p
             class="text-[var(--club-olive)] mb-6 font-['Inter'] text-base leading-relaxed"
           >
-            A quick guide to the most important vet checks every dog needs.
+            {{ post.content|striptags|truncatewords:22 }}
           </p>
+
           <a
-            href="blog-details.html"
+            href="{{ post.get_absolute_url }}"
             class="inline-block bg-[var(--club-rust)] text-white px-5 py-2 font-['Inter'] hover:bg-[var(--club-dark-brown)] transition"
-            >Read More</a
           >
+            Read More
+          </a>
         </div>
       </div>
+      {% empty %}
+      <p class="col-span-full text-[var(--club-olive)] text-lg">
+        No blog posts yet.
+      </p>
+      {% endfor %}
     </div>
   </div>
 </section>
