@@ -1,3 +1,4 @@
+{% load static %}
 <!-- FOOTER -->
 <footer class="bg-[var(--club-taupe)] text-gray-200 pt-16 pb-8 font-['Inter']">
   <div
@@ -5,16 +6,19 @@
   >
     <!-- Logo + Tagline -->
     <div>
-      <h3
-        class="text-3xl font-bold text-[var(--club-olive)] mb-4 font-['Cormorant_Garamond']"
-      >
-        🐾 ThePetPeople
-      </h3>
-      <p class="text-white leading-relaxed">
-        More than just a pet agency – we celebrate all pets! From playful dogs
-        to curious cats and even exotic companions, we bring pet lovers together
-        under one joyful community.
-      </p>
+      <!-- Logo and text in one row -->
+      <div class="flex items-center gap-3 mb-4">
+        <img
+          src="{% static 'images/logo_ppl.jpg' %}"
+          alt="The Pet People Logo"
+          class="h-10 w-10 md:h-12 md:w-12 object-contain"
+        />
+        <h3
+          class="text-3xl font-bold text-[var(--club-olive)] font-['Cormorant_Garamond']"
+        >
+          ThePetPeople
+        </h3>
+      </div>
     </div>
 
     <!-- Quick Links -->
@@ -31,13 +35,8 @@
           >
         </li>
         <li>
-          <a href="#community" class="hover:text-[var(--club-rust)] transition"
-            >Community</a
-          >
-        </li>
-        <li>
-          <a href="#membership" class="hover:text-[var(--club-rust)] transition"
-            >Membership</a
+          <a href="#services" class="hover:text-[var(--club-rust)] transition"
+            >Services</a
           >
         </li>
         <li>
@@ -48,11 +47,6 @@
         <li>
           <a href="#contact" class="hover:text-[var(--club-rust)] transition"
             >Contact</a
-          >
-        </li>
-        <li>
-          <a href="faq.html" class="hover:text-[var(--club-rust)] transition"
-            >FAQ</a
           >
         </li>
       </ul>
@@ -72,33 +66,31 @@
         </li>
         <li class="flex items-center">
           <i class="fa-solid fa-phone text-white w-6"></i>
-          <span class="ml-2">+254 796 140 226</span>
+          <span class="ml-2">+254 798 503 335</span>
         </li>
         <li class="flex items-center">
           <i class="fa-solid fa-envelope text-white w-6"></i>
-          <span class="ml-2">info@thepetpeople.com</span>
+          <span class="ml-2">thepetpplke@gmail.com</span>
         </li>
       </ul>
 
       <!-- Social Icons -->
       <div class="flex space-x-4 mt-6">
         <a
-          href="#"
-          class="text-[var(--club-dark-brown)] hover:text-[var(--club-rust)] text-2xl transition"
-        >
-          <i class="bx bxl-facebook"></i>
-        </a>
-        <a
-          href="#"
+          href="https://www.instagram.com/thepetpeopleke?igsh=MW00NGpnbGhrN2R0NQ%3D%3D&utm_source=qr"
+          target="_blank"
+          rel="noopener noreferrer"
           class="text-[var(--club-dark-brown)] hover:text-[var(--club-rust)] text-2xl transition"
         >
           <i class="bx bxl-instagram"></i>
         </a>
         <a
-          href="#"
+          href="https://www.tiktok.com/@thepetpeopleke?_r=1&_t=ZS-95tZgCDjmYm"
+          target="_blank"
+          rel="noopener noreferrer"
           class="text-[var(--club-dark-brown)] hover:text-[var(--club-rust)] text-2xl transition"
         >
-          <i class="bx bxl-twitter"></i>
+          <i class="bx bxl-tiktok"></i>
         </a>
       </div>
     </div>
