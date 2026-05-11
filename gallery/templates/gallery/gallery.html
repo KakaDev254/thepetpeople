@@ -2,7 +2,8 @@
 Pet People{% endblock %} {% block content %}
 
 <!-- HERO SECTION -->
-<section class="relative h-[60vh] md:h-[70vh] w-full overflow-hidden mt-[80px]">
+<section class="relative h-[60vh] md:h-[70vh] w-full overflow-hidden">
+  <!-- Video Background -->
   <video
     autoplay
     muted
@@ -10,88 +11,298 @@ Pet People{% endblock %} {% block content %}
     playsinline
     class="absolute inset-0 w-full h-full object-cover z-0"
   >
-    <source src="{% static 'core/videos/vid2.mp4' %}" type="video/mp4" />
+    <source src="{% static 'core/videos/hero3.mp4' %}" type="video/mp4" />
   </video>
 
-  <div class="absolute inset-0 bg-black/40 z-0"></div>
+  <div
+    class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/50 z-0"
+  ></div>
 
   <div
     class="relative z-10 flex flex-col items-center justify-center h-full text-center px-6"
   >
-    <h1 class="text-4xl sm:text-5xl font-['Cinzel'] text-white mb-3">
-      Our <span class="text-[var(--club-sand-light)]">Gallery</span>
-    </h1>
-    <p class="text-white/80 text-md md:text-lg max-w-3xl">
-      Explore the joyful moments of pets and their humans.
-    </p>
+    <div class="animate-fade-in">
+      <div class="inline-flex items-center justify-center mb-6">
+        <div
+          class="w-20 h-20 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/20"
+        >
+          <i class="bx bx-camera text-4xl text-white"></i>
+        </div>
+      </div>
+      <h1
+        class="text-4xl sm:text-6xl md:text-7xl font-bold text-white mb-4 font-['Cormorant_Garamond']"
+      >
+        Our <span class="text-[var(--club-sand-light)]">Gallery</span>
+      </h1>
+      <div class="w-24 h-1 bg-[var(--club-rust)] mx-auto mb-6"></div>
+      <p class="text-white/90 text-md md:text-xl max-w-3xl leading-relaxed">
+        Explore the joyful moments of pets and their humans
+      </p>
+    </div>
+  </div>
+
+  <!-- Scroll Down Indicator -->
+  <div
+    class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 animate-bounce"
+  >
+    <i class="bx bx-chevron-down text-3xl text-white"></i>
   </div>
 </section>
 
 <!-- GALLERY GRID -->
-<section class="pt-24 pb-20 bg-[var(--club-sand-light)]">
-  <div class="max-w-7xl mx-auto px-6 text-center">
-    <h2 class="text-3xl font-['Cinzel'] text-[var(--club-dark-brown)] mb-12">
-      Capturing <span class="text-[var(--club-rust)]">Moments</span> of Joy
-    </h2>
+<section class="py-24 bg-gradient-to-b from-[var(--club-sand-light)] to-white">
+  <div class="max-w-7xl mx-auto px-6">
+    <!-- Section Header -->
+    <div class="text-center mb-12">
+      <span
+        class="text-[var(--club-rust)] font-semibold uppercase tracking-wider text-sm"
+        >Memories</span
+      >
+      <h2
+        class="text-3xl md:text-4xl font-bold text-[var(--club-dark-brown)] mt-2 mb-4"
+      >
+        Capturing <span class="text-[var(--club-rust)]">Moments</span> of Joy
+      </h2>
+      <div class="w-20 h-1 bg-[var(--club-rust)] mx-auto"></div>
+    </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- Gallery Grid with Masonry-like layout -->
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+    >
       {% for image in images %}
       <div
-        class="relative w-full overflow-hidden rounded-xl shadow-md bg-[var(--club-taupe-light)] hover:shadow-lg transition"
-        style="padding-top: 75%"
+        class="group relative overflow-hidden rounded-xl shadow-md hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 cursor-pointer"
+        onclick="openLightbox('{{ image.image.url|escapejs }}', '{{ image.title|escapejs }}', '{{ image.description|escapejs }}')"
       >
-        <img
-          src="{{ image.image.url }}?q=auto&f=auto"
-          alt="{{ image.title }}"
-          class="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-300 cursor-pointer"
-          loading="lazy"
-          onclick="openLightbox('{{ image.image.url|escapejs }}')"
-        />
+        <!-- Image Container with fixed aspect ratio -->
+        <div
+          class="relative overflow-hidden bg-[var(--club-taupe-light)]"
+          style="padding-top: 100%"
+        >
+          <img
+            src="{{ image.image.url }}"
+            alt="{{ image.title }}"
+            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            loading="lazy"
+          />
+        </div>
+
+        <!-- Overlay on Hover -->
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-4"
+        >
+          <div
+            class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500"
+          >
+            <h3 class="text-white font-semibold text-lg">
+              {{ image.title|truncatechars:30 }}
+            </h3>
+            {% if image.description %}
+            <p class="text-white/80 text-sm mt-1">
+              {{ image.description|truncatechars:50 }}
+            </p>
+            {% endif %}
+            <div class="flex items-center gap-2 mt-2 text-white/70 text-xs">
+              <i class="bx bx-search-alt-2"></i>
+              <span>Click to view</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Icon Badge -->
+        <div
+          class="absolute top-3 right-3 bg-black/50 backdrop-blur-sm rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        >
+          <i class="bx bx-expand text-white text-sm"></i>
+        </div>
       </div>
       {% empty %}
-      <p class="col-span-full text-[var(--club-dark-brown-light)] text-lg">
-        No images available yet.
-      </p>
+      <div class="col-span-full">
+        <div class="text-center py-20">
+          <div
+            class="inline-flex items-center justify-center w-24 h-24 bg-[var(--club-sand-light)] rounded-full mb-6"
+          >
+            <i class="bx bx-photo-album text-4xl text-[var(--club-rust)]"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-[var(--club-dark-brown)] mb-3">
+            No Images Yet
+          </h3>
+          <p class="text-[var(--club-olive-light)] max-w-md mx-auto">
+            Our gallery is being filled with wonderful memories. Check back soon
+            for adorable pet photos!
+          </p>
+        </div>
+      </div>
       {% endfor %}
     </div>
+
+    <!-- Load More Button (if applicable) -->
+    {% if images|length >= 8 %}
+    <div class="text-center mt-12">
+      <button
+        class="inline-flex items-center gap-2 border-2 border-[var(--club-rust)] text-[var(--club-rust)] hover:bg-[var(--club-rust)] hover:text-white font-semibold py-3 px-8 rounded-full transition-all duration-300"
+      >
+        <i class="bx bx-plus-circle"></i>
+        Load More
+      </button>
+    </div>
+    {% endif %}
   </div>
 </section>
 
 <!-- LIGHTBOX -->
 <div
   id="lightbox"
-  class="fixed inset-0 bg-black/80 hidden z-50 flex items-center justify-center px-4"
+  class="fixed inset-0 bg-black/95 hidden z-50 flex items-center justify-center px-4"
+  style="backdrop-filter: blur(5px)"
 >
   <button
     onclick="closeLightbox()"
-    class="absolute top-5 right-5 text-white text-4xl hover:text-[var(--club-sand-light)] transition"
+    class="absolute top-5 right-5 text-white text-5xl hover:text-[var(--club-sand-light)] transition-all duration-300 z-10"
   >
     &times;
   </button>
 
-  <img
-    id="lightbox-img"
-    src=""
-    class="max-h-[85vh] max-w-[95vw] rounded-xl shadow-2xl border-4 border-[var(--club-sand-light)]"
-  />
+  <button
+    onclick="previousImage()"
+    class="absolute left-5 text-white text-4xl hover:text-[var(--club-sand-light)] transition-all duration-300 bg-black/30 rounded-full p-2 hover:bg-black/50"
+  >
+    <i class="bx bx-chevron-left"></i>
+  </button>
+
+  <button
+    onclick="nextImage()"
+    class="absolute right-5 text-white text-4xl hover:text-[var(--club-sand-light)] transition-all duration-300 bg-black/30 rounded-full p-2 hover:bg-black/50"
+  >
+    <i class="bx bx-chevron-right"></i>
+  </button>
+
+  <div class="relative max-w-5xl mx-auto">
+    <img
+      id="lightbox-img"
+      src=""
+      class="max-h-[85vh] max-w-[90vw] rounded-xl shadow-2xl"
+    />
+
+    <!-- Lightbox Caption -->
+    <div
+      id="lightbox-caption"
+      class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 rounded-b-xl"
+    >
+      <h3 id="lightbox-title" class="text-white font-semibold text-xl"></h3>
+      <p id="lightbox-desc" class="text-white/80 text-sm mt-1"></p>
+    </div>
+  </div>
 </div>
 
 <script>
-  function openLightbox(src) {
+  // Store all images for navigation
+  const images = [
+    {% for image in images %}
+    {
+      url: "{{ image.image.url|escapejs }}",
+      title: "{{ image.title|escapejs }}",
+      description: "{{ image.description|escapejs|default:'' }}"
+    },
+    {% endfor %}
+  ];
+
+  let currentIndex = 0;
+
+  function openLightbox(src, title, description) {
     const lightbox = document.getElementById("lightbox");
     const img = document.getElementById("lightbox-img");
+    const titleEl = document.getElementById("lightbox-title");
+    const descEl = document.getElementById("lightbox-desc");
+
     img.src = src;
+    titleEl.textContent = title || "Memory";
+    descEl.textContent = description || "";
     lightbox.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+
+    // Find current index
+    currentIndex = images.findIndex(img => img.url === src);
   }
 
   function closeLightbox() {
     document.getElementById("lightbox").classList.add("hidden");
+    document.body.style.overflow = "";
+  }
+
+  function previousImage() {
+    if (images.length === 0) return;
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    const img = images[currentIndex];
+    document.getElementById("lightbox-img").src = img.url;
+    document.getElementById("lightbox-title").textContent = img.title || "Memory";
+    document.getElementById("lightbox-desc").textContent = img.description || "";
+  }
+
+  function nextImage() {
+    if (images.length === 0) return;
+    currentIndex = (currentIndex + 1) % images.length;
+    const img = images[currentIndex];
+    document.getElementById("lightbox-img").src = img.url;
+    document.getElementById("lightbox-title").textContent = img.title || "Memory";
+    document.getElementById("lightbox-desc").textContent = img.description || "";
   }
 
   // Close on ESC key
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape") closeLightbox();
+    if (e.key === "ArrowLeft") previousImage();
+    if (e.key === "ArrowRight") nextImage();
+  });
+
+  // Close lightbox when clicking outside the image
+  document.getElementById("lightbox").addEventListener("click", function(e) {
+    if (e.target === this) closeLightbox();
   });
 </script>
+
+<style>
+  /* Animations */
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.8s ease-out;
+  }
+
+  /* Bounce animation for scroll indicator */
+  @keyframes bounce {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(10px);
+    }
+  }
+
+  .animate-bounce {
+    animation: bounce 2s infinite;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Lightbox transition */
+  #lightbox {
+    transition: all 0.3s ease;
+  }
+</style>
 
 {% endblock %}

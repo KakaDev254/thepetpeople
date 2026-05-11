@@ -1,0 +1,76 @@
+{% extends 'main/base.html' %} {% load static %} {% block title %}{{ event.title
+}} | The Pet People{% endblock %} {% block content %}
+<section class="py-20 bg-white">
+  <div class="max-w-4xl mx-auto px-6">
+    <!-- Back button -->
+    <div class="mb-8">
+      <a
+        href="{% url 'event_list' %}"
+        class="text-[var(--club-rust-light)] hover:underline inline-flex items-center"
+      >
+        ← Back to Events
+      </a>
+    </div>
+
+    <!-- Event Image -->
+    {% if event.image %}
+    <div class="mb-8 rounded-lg overflow-hidden shadow-lg">
+      <img
+        src="{{ event.image.url }}"
+        alt="{{ event.title }}"
+        class="w-full h-96 object-cover"
+      />
+    </div>
+    {% endif %}
+
+    <!-- Event Title -->
+    <h1
+      class="text-4xl md:text-5xl font-bold text-[var(--club-dark-brown)] mb-4"
+    >
+      {{ event.title }}
+    </h1>
+
+    <!-- Event Meta -->
+    <div
+      class="flex flex-wrap gap-4 mb-8 pb-4 border-b border-[var(--club-taupe-light)]"
+    >
+      <div class="flex items-center text-[var(--club-olive-light)]">
+        <span class="mr-2">📅</span>
+        {{ event.date|date:"F d, Y" }}
+      </div>
+      {% if event.location %}
+      <div class="flex items-center text-[var(--club-olive-light)]">
+        <span class="mr-2">📍</span>
+        {{ event.location }}
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Event Description -->
+    <div class="prose prose-lg max-w-none text-[var(--club-olive-light)] mb-8">
+      {{ event.description|linebreaks }}
+    </div>
+
+    <!-- CTA Buttons -->
+    <div
+      class="flex flex-wrap gap-4 mt-8 pt-8 border-t border-[var(--club-taupe-light)]"
+    >
+      <a
+        href="{% url 'event_list' %}"
+        class="inline-block bg-[var(--club-taupe)] hover:bg-[var(--club-rust)] text-white font-semibold py-3 px-8 transition"
+      >
+        View All Events
+      </a>
+
+      {% if event.is_upcoming %}
+      <a
+        href="#"
+        class="inline-block bg-[var(--club-rust-light)] hover:bg-[var(--club-rust)] text-white font-semibold py-3 px-8 transition"
+      >
+        Register for Event →
+      </a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}
