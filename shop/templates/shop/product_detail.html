@@ -1,0 +1,121 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}{{ product.name }} - The Pet People{% endblock %}
+
+{% block content %}
+
+<!-- PRODUCT DETAIL SECTION -->
+<section class="pt-32 pb-20 px-6 bg-white">
+  <div class="max-w-7xl mx-auto">
+    <!-- Back Button -->
+    <div class="mb-8">
+      <a href="{% url 'shop' %}" class="text-[var(--club-rust)] hover:underline inline-flex items-center gap-2">
+        <i class="bx bx-arrow-back"></i>
+        Back to Shop
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <!-- Product Image -->
+      <div class="rounded-xl overflow-hidden bg-[var(--club-sand-light)]">
+        {% if product.image %}
+          <img src="{% static product.image.url %}" 
+               alt="{{ product.name }}" 
+               class="w-full h-full object-cover"
+               loading="lazy">
+        {% else %}
+          <div class="w-full h-96 flex items-center justify-center">
+            <i class="bx bx-package text-6xl text-[var(--club-taupe)]"></i>
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Product Info -->
+      <div>
+        <h1 class="text-3xl md:text-4xl font-bold text-[var(--club-dark-brown)] mb-4">
+          {{ product.name }}
+        </h1>
+        
+        <!-- Price -->
+        <div class="mb-6">
+          <span class="text-3xl font-bold text-[var(--club-rust)]">KES {{ product.price }}</span>
+        </div>
+
+        <!-- Description -->
+        <div class="mb-8">
+          <h3 class="text-lg font-semibold text-[var(--club-dark-brown)] mb-2">Description</h3>
+          <p class="text-[var(--club-olive-light)] leading-relaxed">
+            {{ product.description|linebreaks }}
+          </p>
+        </div>
+
+        <!-- Stock Status -->
+        <div class="mb-6">
+          {% if product.in_stock %}
+            <span class="inline-flex items-center gap-2 text-green-600 bg-green-50 px-3 py-1 rounded-full text-sm">
+              <i class="bx bx-check-circle"></i>
+              In Stock
+            </span>
+          {% else %}
+            <span class="inline-flex items-center gap-2 text-red-600 bg-red-50 px-3 py-1 rounded-full text-sm">
+              <i class="bx bx-x-circle"></i>
+              Out of Stock
+            </span>
+          {% endif %}
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4">
+          {% if product.in_stock %}
+            <a href="https://wa.me/254798503335?text=Hi!%20I'm%20interested%20in%20*{{ product.name }}*%20(KES%20{{ product.price }})%20from%20The%20Pet%20People%20Shop." 
+               target="_blank" 
+               class="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white px-6 py-3 rounded-lg font-semibold transition">
+              <i class="bx bxl-whatsapp text-xl"></i>
+              Inquire on WhatsApp
+            </a>
+          {% else %}
+            <button disabled class="bg-gray-400 text-white px-6 py-3 rounded-lg font-semibold cursor-not-allowed">
+              Out of Stock
+            </button>
+          {% endif %}
+        </div>
+
+        <!-- Additional Info -->
+        <div class="mt-8 pt-6 border-t border-gray-200">
+          <div class="flex items-center gap-4 text-sm text-[var(--club-olive-light)]">
+            <div class="flex items-center gap-2">
+              <i class="bx bx-truck"></i>
+              <span>Free Shipping on orders over KES 5000</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i class="bx bx-lock-alt"></i>
+              <span>Secure WhatsApp Inquiry</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Related Products Section (Optional) -->
+    {% if related_products %}
+    <div class="mt-20">
+      <h3 class="text-2xl font-bold text-[var(--club-dark-brown)] mb-6">You May Also Like</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {% for related in related_products %}
+        <div class="bg-white rounded-lg shadow hover:shadow-lg transition p-4 text-center border">
+          {% if related.image %}
+            <img src="{% static related.image.url %}" alt="{{ related.name }}" class="w-full h-40 object-cover rounded-md mb-3">
+          {% endif %}
+          <h4 class="font-semibold text-[var(--club-dark-brown)]">{{ related.name }}</h4>
+          <p class="text-[var(--club-rust)] font-bold">KES {{ related.price }}</p>
+          <a href="{% url 'product_detail' related.id %}" class="mt-2 inline-block text-sm text-[var(--club-rust)] hover:underline">View Details</a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+{% endblock %}
