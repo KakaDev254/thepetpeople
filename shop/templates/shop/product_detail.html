@@ -1,5 +1,6 @@
 {% extends "main/base.html" %}
 {% load static %}
+{% load cloudinary %}
 
 {% block title %}{{ product.name }} - The Pet People{% endblock %}
 
@@ -17,13 +18,10 @@
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-      <!-- Product Image -->
+      <!-- Product Image with Cloudinary -->
       <div class="rounded-xl overflow-hidden bg-[var(--club-sand-light)]">
         {% if product.image %}
-          <img src="{% static product.image.url %}" 
-               alt="{{ product.name }}" 
-               class="w-full h-full object-cover"
-               loading="lazy">
+          {% cloudinary product.image.public_id width=600 height=600 crop="fill" quality="auto" class="w-full h-full object-cover" alt=product.name loading="lazy" %}
         {% else %}
           <div class="w-full h-96 flex items-center justify-center">
             <i class="bx bx-package text-6xl text-[var(--club-taupe)]"></i>
@@ -68,7 +66,7 @@
         <!-- Action Buttons -->
         <div class="flex flex-col sm:flex-row gap-4">
           {% if product.in_stock %}
-            <a href="https://wa.me/254798503335?text=Hi!%20I'm%20interested%20in%20*{{ product.name }}*%20(KES%20{{ product.price }})%20from%20The%20Pet%20People%20Shop." 
+            <a href="https://wa.me/254798503335?text=Hi!%20I'm%20interested%20in%20*{{ product.name|urlencode }}*%20(KES%20{{ product.price }})%20from%20The%20Pet%20People%20Shop." 
                target="_blank" 
                class="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white px-6 py-3 rounded-lg font-semibold transition">
               <i class="bx bxl-whatsapp text-xl"></i>
@@ -83,7 +81,7 @@
 
         <!-- Additional Info -->
         <div class="mt-8 pt-6 border-t border-gray-200">
-          <div class="flex items-center gap-4 text-sm text-[var(--club-olive-light)]">
+          <div class="flex flex-wrap items-center gap-4 text-sm text-[var(--club-olive-light)]">
             <div class="flex items-center gap-2">
               <i class="bx bx-truck"></i>
               <span>Free Shipping on orders over KES 5000</span>
@@ -92,24 +90,32 @@
               <i class="bx bx-lock-alt"></i>
               <span>Secure WhatsApp Inquiry</span>
             </div>
+            <div class="flex items-center gap-2">
+              <i class="bx bx-calendar"></i>
+              <span>Added: {{ product.created_at|date:"M d, Y" }}</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Related Products Section (Optional) -->
+    <!-- Related Products Section -->
     {% if related_products %}
     <div class="mt-20">
       <h3 class="text-2xl font-bold text-[var(--club-dark-brown)] mb-6">You May Also Like</h3>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {% for related in related_products %}
-        <div class="bg-white rounded-lg shadow hover:shadow-lg transition p-4 text-center border">
+        <div class="bg-white rounded-lg shadow hover:shadow-lg transition p-4 text-center border group">
           {% if related.image %}
-            <img src="{% static related.image.url %}" alt="{{ related.name }}" class="w-full h-40 object-cover rounded-md mb-3">
+            {% cloudinary related.image.public_id width=200 height=200 crop="fill" quality="auto" class="w-full h-40 object-cover rounded-md mb-3 transition-transform group-hover:scale-105" alt=related.name loading="lazy" %}
+          {% else %}
+            <div class="w-full h-40 bg-[var(--club-sand-light)] rounded-md mb-3 flex items-center justify-center">
+              <i class="bx bx-package text-3xl text-[var(--club-taupe)]"></i>
+            </div>
           {% endif %}
-          <h4 class="font-semibold text-[var(--club-dark-brown)]">{{ related.name }}</h4>
+          <h4 class="font-semibold text-[var(--club-dark-brown)] mb-1">{{ related.name|truncatechars:30 }}</h4>
           <p class="text-[var(--club-rust)] font-bold">KES {{ related.price }}</p>
-          <a href="{% url 'product_detail' related.id %}" class="mt-2 inline-block text-sm text-[var(--club-rust)] hover:underline">View Details</a>
+          <a href="{% url 'product_detail' related.id %}" class="mt-2 inline-block text-sm text-[var(--club-rust)] hover:underline">View Details →</a>
         </div>
         {% endfor %}
       </div>
