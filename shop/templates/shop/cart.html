@@ -1,10 +1,13 @@
-{% extends "main/base.html" %} {% load static %} {% block title %}Your Cart -
-The Pet People{% endblock %} {% block content %}
+{% extends "main/base.html" %}
+{% load static %}
+{% load cloudinary %}
+
+{% block title %}Your Cart - The Pet People{% endblock %}
+
+{% block content %}
 <section class="pt-32 pb-20 px-6">
   <div class="max-w-6xl mx-auto">
-    <h2
-      class="text-4xl font-['Cinzel'] text-center text-[var(--club-dark-brown)] mb-10"
-    >
+    <h2 class="text-4xl font-['Cinzel'] text-center text-[var(--club-dark-brown)] mb-10">
       Your <span class="text-[var(--club-rust)]">Cart</span>
     </h2>
 
@@ -28,20 +31,10 @@ The Pet People{% endblock %} {% block content %}
             <td class="py-4 px-4">
               <div class="flex items-center gap-4">
                 {% if item.product.image %}
-                <img
-                  src="{{ item.product.image.url }}?q=auto&f=auto"
-                  alt="{{ item.product.name }}"
-                  class="w-14 h-14 rounded-md object-cover"
-                  loading="lazy"
-                />
+                  {% cloudinary item.product.image.public_id width=80 height=80 crop="thumb" quality="auto" class="w-14 h-14 rounded-md object-cover" alt=item.product.name loading="lazy" %}
                 {% else %}
-                <img
-                  src="{% static 'core/images/placeholder.webp' %}"
-                  alt="{{ item.product.name }}"
-                  class="w-14 h-14 rounded-md object-cover"
-                />
+                  <img src="{% static 'core/images/placeholder.webp' %}" alt="{{ item.product.name }}" class="w-14 h-14 rounded-md object-cover">
                 {% endif %}
-
                 <span class="font-medium text-[var(--club-dark-brown)]">
                   {{ item.product.name }}
                 </span>
@@ -49,22 +42,25 @@ The Pet People{% endblock %} {% block content %}
             </td>
 
             <!-- PRICE -->
-            <td class="py-4 px-4">${{ item.product.price }}</td>
+            <td class="py-4 px-4">KES {{ item.product.price }}</td>
 
-            <!-- QUANTITY -->
-            <td class="py-4 px-4">{{ item.quantity }}</td>
+            <!-- QUANTITY with update option -->
+            <td class="py-4 px-4">
+              <form method="POST" action="{% url 'update_cart' item.id %}" class="flex items-center gap-2">
+                {% csrf_token %}
+                <input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="w-16 px-2 py-1 border rounded text-center">
+                <button type="submit" class="text-[var(--club-rust)] hover:underline text-sm">Update</button>
+              </form>
+            </td>
 
             <!-- SUBTOTAL -->
             <td class="py-4 px-4 font-semibold text-[var(--club-dark-brown)]">
-              ${{ item.get_subtotal }}
+              KES {{ item.get_subtotal }}
             </td>
 
             <!-- REMOVE -->
             <td class="py-4 px-4">
-              <a
-                href="{% url 'remove_from_cart' item.id %}"
-                class="text-red-600 hover:underline"
-              >
+              <a href="{% url 'remove_from_cart' item.id %}" class="text-red-600 hover:underline" onclick="return confirm('Remove this item from cart?')">
                 Remove
               </a>
             </td>
@@ -75,31 +71,63 @@ The Pet People{% endblock %} {% block content %}
     </div>
 
     <!-- CART SUMMARY -->
-    <div
-      class="mt-10 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-6"
-    >
-      <p class="text-xl font-semibold text-[var(--club-dark-brown)]">
-        Total:
-        <span class="text-[var(--club-rust)]"> ${{ total }} </span>
-      </p>
+    <div class="mt-10 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-6">
+      <div>
+        <p class="text-xl font-semibold text-[var(--club-dark-brown)]">
+          Total: <span class="text-[var(--club-rust)]">KES {{ total }}</span>
+        </p>
+        <p class="text-sm text-[var(--club-olive-light)] mt-1">* Final price will be confirmed via WhatsApp</p>
+      </div>
 
-      <a
-        href="{% url 'checkout' %}"
-        class="inline-flex items-center justify-center bg-[var(--club-rust)] hover:bg-[var(--club-dark-brown)] text-white px-8 py-3 rounded-lg font-semibold transition"
-      >
-        Proceed to Checkout →
-      </a>
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="{% url 'shop' %}" class="inline-flex items-center justify-center border-2 border-[var(--club-rust)] text-[var(--club-rust)] hover:bg-[var(--club-rust)] hover:text-white px-6 py-3 rounded-lg font-semibold transition">
+          ← Continue Shopping
+        </a>
+        <a href="{% url 'whatsapp_checkout' %}" target="_blank" class="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white px-8 py-3 rounded-lg font-semibold transition">
+          <i class="bx bxl-whatsapp text-xl"></i>
+          Send Inquiry on WhatsApp →
+        </a>
+      </div>
+    </div>
+
+    <!-- Free Shipping Note -->
+    <div class="mt-6 p-4 bg-[var(--club-sand-light)] rounded-lg text-center">
+      <p class="text-[var(--club-dark-brown)] text-sm">
+        <i class="bx bx-info-circle"></i> 
+        This is an inquiry system. Our team will contact you on WhatsApp to confirm your order, delivery, and payment details.
+      </p>
     </div>
 
     {% else %}
     <div class="text-center py-20">
+      <div class="inline-flex items-center justify-center w-24 h-24 bg-[var(--club-sand-light)] rounded-full mb-6">
+        <i class="bx bx-cart text-4xl text-[var(--club-rust)]"></i>
+      </div>
       <p class="text-gray-600 text-lg mb-6">Your cart is currently empty.</p>
-      <a
-        href="{% url 'shop' %}"
-        class="inline-block bg-[var(--club-rust)] hover:bg-[var(--club-dark-brown)] text-white px-6 py-3 rounded-lg transition"
-      >
+      <a href="{% url 'shop' %}" class="inline-block bg-[var(--club-rust)] hover:bg-[var(--club-dark-brown)] text-white px-6 py-3 rounded-lg transition">
         Continue Shopping
       </a>
+    </div>
+    {% endif %}
+
+    <!-- Featured Products Section (Optional) -->
+    {% if not items %}
+    <div class="mt-16">
+      <h3 class="text-2xl font-['Cinzel'] text-center text-[var(--club-dark-brown)] mb-8">Featured Products</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {% load shop_tags %}
+        {% get_featured_products as featured %}
+        {% for product in featured|slice:":4" %}
+        <div class="bg-white rounded-lg shadow hover:shadow-lg transition p-4 text-center">
+          {% if product.image %}
+            {% cloudinary product.image.public_id width=200 height=200 crop="fill" quality="auto" class="w-full h-40 object-cover rounded-md mb-3" alt=product.name %}
+          {% endif %}
+          <h4 class="font-semibold text-[var(--club-dark-brown)]">{{ product.name }}</h4>
+          <p class="text-[var(--club-rust)] font-bold">KES {{ product.price }}</p>
+          <a href="{% url 'add_to_cart' product.id %}" class="mt-2 inline-block text-sm bg-[var(--club-rust)] text-white px-3 py-1 rounded hover:bg-[var(--club-dark-brown)] transition">Add to Cart</a>
+        </div>
+        {% endfor %}
+      </div>
     </div>
     {% endif %}
   </div>

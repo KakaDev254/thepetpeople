@@ -1,53 +1,40 @@
-{% extends "main/base.html" %} {% load static %} {% block title %}Shop - The Pet
-People{% endblock %} {% block content %}
+{% extends "main/base.html" %}
+{% load static %}
+{% load cloudinary %}
+
+{% block title %}Shop - The Pet People{% endblock %}
+
+{% block content %}
+
 
 <!-- HERO SECTION -->
-<section
-  class="relative h-[50vh] flex items-center justify-center overflow-hidden"
->
+<section class="relative h-[50vh] flex items-center justify-center overflow-hidden">
   <!-- Background Image -->
   <div class="absolute inset-0">
-    <div
-      class="absolute inset-0 bg-gradient-to-r from-black/60 to-black/50 z-10"
-    ></div>
-    <img
-      src="{% static 'core/images/shop-hero.jpg' %}"
-      alt="Shop Hero"
-      class="w-full h-full object-cover"
-      onerror="
-        this.src =
-          'https://images.unsplash.com/photo-1601758228041-f3b2795255f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'
-      "
-    />
+    <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-black/50 z-10"></div>
+    <img src="{% static 'core/images/shop-hero.jpg' %}" 
+         alt="Shop Hero" 
+         class="w-full h-full object-cover"
+         onerror="this.src='https://images.unsplash.com/photo-1601758228041-f3b2795255f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'">
   </div>
 
   <div class="relative z-20 max-w-4xl mx-auto px-6 text-center">
     <div class="inline-flex items-center justify-center mb-6 animate-fade-in">
-      <div
-        class="w-20 h-20 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/20"
-      >
+      <div class="w-20 h-20 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/20">
         <i class="bx bx-shopping-bag text-4xl text-white"></i>
       </div>
     </div>
-    <h1
-      class="text-5xl md:text-7xl font-bold text-white mb-5 font-['Cormorant_Garamond'] animate-slide-up"
-    >
+    <h1 class="text-5xl md:text-7xl font-bold text-white mb-5 font-['Cormorant_Garamond'] animate-slide-up">
       Our <span class="text-[var(--club-sand-light)]">Shop</span>
     </h1>
-    <div
-      class="w-24 h-1 bg-[var(--club-rust)] mx-auto mb-6 animate-slide-up"
-    ></div>
-    <p
-      class="text-white/95 text-lg md:text-xl max-w-2xl mx-auto animate-slide-up leading-relaxed"
-    >
+    <div class="w-24 h-1 bg-[var(--club-rust)] mx-auto mb-6 animate-slide-up"></div>
+    <p class="text-white/95 text-lg md:text-xl max-w-2xl mx-auto animate-slide-up leading-relaxed">
       Find everything your furry friend deserves
     </p>
   </div>
 
   <!-- Scroll Down Indicator -->
-  <div
-    class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 animate-bounce"
-  >
+  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 animate-bounce">
     <i class="bx bx-chevron-down text-3xl text-white"></i>
   </div>
 </section>
@@ -57,13 +44,8 @@ People{% endblock %} {% block content %}
   <div class="max-w-7xl mx-auto px-6 lg:px-8">
     <!-- Section Header -->
     <div class="text-center mb-12">
-      <span
-        class="text-[var(--club-rust)] font-semibold uppercase tracking-wider text-sm"
-        >Premium Quality</span
-      >
-      <h2
-        class="text-3xl md:text-4xl font-bold text-[var(--club-dark-brown)] mt-2 mb-4"
-      >
+      <span class="text-[var(--club-rust)] font-semibold uppercase tracking-wider text-sm">Premium Quality</span>
+      <h2 class="text-3xl md:text-4xl font-bold text-[var(--club-dark-brown)] mt-2 mb-4">
         Featured <span class="text-[var(--club-rust)]">Products</span>
       </h2>
       <div class="w-20 h-1 bg-[var(--club-rust)] mx-auto"></div>
@@ -72,210 +54,98 @@ People{% endblock %} {% block content %}
       </p>
     </div>
 
-    <!-- Category Filters -->
-    <div class="flex flex-wrap justify-center gap-3 mb-12">
-      <button
-        class="px-6 py-2 bg-[var(--club-rust)] text-white rounded-full text-sm font-semibold transition hover:bg-[var(--club-dark-brown)]"
-      >
-        All Products
-      </button>
-      <button
-        class="px-6 py-2 bg-white border border-[var(--club-taupe)] text-[var(--club-dark-brown)] rounded-full text-sm font-semibold transition hover:bg-[var(--club-rust)] hover:text-white hover:border-[var(--club-rust)]"
-      >
-        Dog Supplies
-      </button>
-      <button
-        class="px-6 py-2 bg-white border border-[var(--club-taupe)] text-[var(--club-dark-brown)] rounded-full text-sm font-semibold transition hover:bg-[var(--club-rust)] hover:text-white hover:border-[var(--club-rust)]"
-      >
-        Cat Supplies
-      </button>
-      <button
-        class="px-6 py-2 bg-white border border-[var(--club-taupe)] text-[var(--club-dark-brown)] rounded-full text-sm font-semibold transition hover:bg-[var(--club-rust)] hover:text-white hover:border-[var(--club-rust)]"
-      >
-        Accessories
-      </button>
-      <button
-        class="px-6 py-2 bg-white border border-[var(--club-taupe)] text-[var(--club-dark-brown)] rounded-full text-sm font-semibold transition hover:bg-[var(--club-rust)] hover:text-white hover:border-[var(--club-rust)]"
-      >
-        Toys
-      </button>
-    </div>
-
     <!-- Products Grid -->
-    <div
-      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
-    >
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
       {% for product in products %}
-      <div
-        class="group bg-white rounded-xl shadow-sm hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 overflow-hidden flex flex-col border border-gray-100"
-      >
-        <!-- PRODUCT IMAGE with fixed height -->
-        <div
-          class="relative overflow-hidden h-72 bg-gradient-to-br from-[var(--club-sand-light)] to-[var(--club-taupe-light)]"
-        >
+      <div class="group bg-white rounded-xl shadow-sm hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 overflow-hidden flex flex-col border border-gray-100">
+        
+        <!-- PRODUCT IMAGE with fixed height - Cloudinary Optimized -->
+        <div class="relative overflow-hidden h-72 bg-gradient-to-br from-[var(--club-sand-light)] to-[var(--club-taupe-light)]">
           {% if product.image %}
-          <img
-            src="{{ product.image.url }}"
-            alt="{{ product.name }}"
-            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-            loading="lazy"
-          />
+            {% cloudinary product.image.public_id width=400 height=400 crop="fill" quality="auto" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt=product.name loading="lazy" %}
           {% else %}
-          <div class="w-full h-full flex items-center justify-center">
-            <i class="bx bx-package text-6xl text-[var(--club-taupe)]"></i>
-          </div>
+            <div class="w-full h-full flex items-center justify-center">
+              <i class="bx bx-package text-6xl text-[var(--club-taupe)]"></i>
+            </div>
           {% endif %}
 
-          <!-- Sale Badge -->
-          {% if product.sale_price %}
-          <div class="absolute top-4 left-4">
-            <span
-              class="px-3 py-1.5 bg-red-500 text-white text-xs rounded-full font-semibold shadow-md"
-            >
-              SALE
-            </span>
+          <!-- Out of Stock Badge -->
+          {% if not product.in_stock %}
+          <div class="absolute inset-0 bg-black/60 flex items-center justify-center">
+            <span class="bg-red-600 text-white px-4 py-2 rounded-lg font-bold">Out of Stock</span>
           </div>
           {% endif %}
 
           <!-- Quick View Button -->
-          <div
-            class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center"
-          >
-            <button
-              class="bg-white text-[var(--club-dark-brown)] hover:bg-[var(--club-rust)] hover:text-white px-4 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-2"
-            >
+          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+            <a href="{% url 'product_detail' product.id %}" class="bg-white text-[var(--club-dark-brown)] hover:bg-[var(--club-rust)] hover:text-white px-4 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-2">
               <i class="bx bx-show"></i>
               Quick View
-            </button>
+            </a>
           </div>
         </div>
 
         <!-- PRODUCT INFO -->
         <div class="p-5 flex flex-col flex-1 bg-white">
-          <!-- Category Tag -->
-          <div class="mb-2">
-            <span
-              class="text-xs text-[var(--club-rust)] font-medium uppercase tracking-wide"
-            >
-              {{ product.category|default:"Pet Supply" }}
-            </span>
-          </div>
-
-          <!-- Product Name - Removed the broken link -->
-          <h3
-            class="text-lg font-bold text-[var(--club-dark-brown)] mb-2 line-clamp-2 leading-tight"
-          >
+          <!-- Product Name -->
+          <h3 class="text-lg font-bold text-[var(--club-dark-brown)] mb-2 line-clamp-2 leading-tight">
             {{ product.name }}
           </h3>
 
           <!-- Description -->
-          <p
-            class="text-[var(--club-olive-light)] text-sm leading-relaxed mb-4 line-clamp-2"
-          >
+          <p class="text-[var(--club-olive-light)] text-sm leading-relaxed mb-4 line-clamp-2">
             {{ product.description|striptags|truncatewords:12 }}
           </p>
 
-          <!-- Rating Stars -->
-          <div class="flex items-center gap-1 mb-3">
-            <div class="flex text-yellow-400">
-              <i class="bx bxs-star"></i>
-              <i class="bx bxs-star"></i>
-              <i class="bx bxs-star"></i>
-              <i class="bx bxs-star"></i>
-              <i class="bx bx-star"></i>
-            </div>
-            <span class="text-xs text-[var(--club-olive-light)]">(24)</span>
-          </div>
-
-          <!-- Price and Add to Cart -->
-          <div
-            class="flex items-center justify-between mt-auto pt-3 border-t border-gray-100"
-          >
+          <!-- Price and Inquiry -->
+          <div class="flex items-center justify-between mt-auto pt-3 border-t border-gray-100">
             <div class="flex flex-col">
-              {% if product.sale_price %}
-              <span class="text-xs text-gray-400 line-through"
-                >${{ product.price }}</span
-              >
-              <span class="text-[var(--club-rust)] font-bold text-xl"
-                >${{ product.sale_price }}</span
-              >
-              {% else %}
-              <span class="text-[var(--club-rust)] font-bold text-xl"
-                >${{ product.price }}</span
-              >
-              {% endif %}
+              <span class="text-[var(--club-rust)] font-bold text-xl">KES {{ product.price }}</span>
             </div>
 
-            <a
-              href="{% url 'add_to_cart' product.id %}"
-              class="bg-[var(--club-rust)] hover:bg-[var(--club-dark-brown)] text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 flex items-center gap-2 group/add"
-            >
-              <i
-                class="bx bx-cart-add text-lg group-hover/add:scale-110 transition"
-              ></i>
-              Add to Cart
+            {% if product.in_stock %}
+            <a href="{% url 'product_whatsapp_inquiry' product.id %}" target="_blank" class="bg-[#25D366] hover:bg-[#128C7E] text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 flex items-center gap-2 group/inquiry">
+              <i class="bx bxl-whatsapp text-lg group-hover/inquiry:scale-110 transition"></i>
+              Inquire on WhatsApp
             </a>
+            {% else %}
+            <button disabled class="bg-gray-400 text-white px-4 py-2 rounded-lg text-sm font-semibold cursor-not-allowed flex items-center gap-2">
+              <i class="bx bx-x-circle"></i>
+              Out of Stock
+            </button>
+            {% endif %}
           </div>
         </div>
       </div>
       {% empty %}
       <div class="col-span-full">
         <div class="text-center py-20">
-          <div
-            class="inline-flex items-center justify-center w-24 h-24 bg-[var(--club-sand-light)] rounded-full mb-6"
-          >
+          <div class="inline-flex items-center justify-center w-24 h-24 bg-[var(--club-sand-light)] rounded-full mb-6">
             <i class="bx bx-package text-4xl text-[var(--club-rust)]"></i>
           </div>
-          <h3 class="text-2xl font-bold text-[var(--club-dark-brown)] mb-3">
-            No Products Yet
-          </h3>
+          <h3 class="text-2xl font-bold text-[var(--club-dark-brown)] mb-3">No Products Yet</h3>
           <p class="text-[var(--club-olive-light)] max-w-md mx-auto">
-            Our shop is being stocked with amazing products. Check back soon for
-            premium pet supplies!
+            Our shop is being stocked with amazing products. Check back soon for premium pet supplies!
           </p>
         </div>
       </div>
       {% endfor %}
     </div>
 
-    <!-- Load More Button -->
-    {% if products|length >= 8 %}
-    <div class="text-center mt-12">
-      <button
-        class="inline-flex items-center gap-2 border-2 border-[var(--club-rust)] text-[var(--club-rust)] hover:bg-[var(--club-rust)] hover:text-white font-semibold py-3 px-8 rounded-full transition-all duration-300"
-      >
-        <i class="bx bx-loader-circle"></i>
-        Load More Products
-      </button>
-    </div>
-    {% endif %}
-
-    <!-- Free Shipping Banner -->
-    <div
-      class="mt-16 bg-gradient-to-r from-[var(--club-dark-brown)] to-[var(--club-rust)] rounded-2xl p-6 text-center"
-    >
+    <!-- WhatsApp Contact Banner -->
+    <div class="mt-16 bg-gradient-to-r from-[#25D366] to-[#128C7E] rounded-2xl p-6 text-center">
       <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
         <div class="flex items-center gap-3">
-          <i class="bx bx-truck text-3xl text-white"></i>
+          <i class="bx bxl-whatsapp text-4xl text-white"></i>
           <div class="text-left">
-            <p class="text-white font-semibold">Free Shipping</p>
-            <p class="text-white/80 text-sm">On orders over $50</p>
+            <p class="text-white font-semibold text-lg">Shop via WhatsApp</p>
+            <p class="text-white/90 text-sm">Chat with us directly for orders</p>
           </div>
         </div>
-        <div class="flex items-center gap-3">
-          <i class="bx bx-lock-alt text-3xl text-white"></i>
-          <div class="text-left">
-            <p class="text-white font-semibold">Secure Payment</p>
-            <p class="text-white/80 text-sm">100% safe checkout</p>
-          </div>
-        </div>
-        <div class="flex items-center gap-3">
-          <i class="bx bx-repeat text-3xl text-white"></i>
-          <div class="text-left">
-            <p class="text-white font-semibold">Easy Returns</p>
-            <p class="text-white/80 text-sm">30-day return policy</p>
-          </div>
-        </div>
+        <a href="https://wa.me/254798503335?text=Hi!%20I'd%20like%20to%20inquire%20about%20your%20products%20at%20The%20Pet%20People." target="_blank" class="bg-white text-[#25D366] hover:bg-[#075E54] hover:text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 flex items-center gap-2">
+          <i class="bx bxl-whatsapp text-xl"></i>
+          Contact Us on WhatsApp
+        </a>
       </div>
     </div>
   </div>
@@ -330,8 +200,7 @@ People{% endblock %} {% block content %}
 
   /* Bounce animation */
   @keyframes bounce {
-    0%,
-    100% {
+    0%, 100% {
       transform: translateY(0);
     }
     50% {

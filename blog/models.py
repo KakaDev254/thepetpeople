@@ -1,13 +1,15 @@
 from django.db import models
 from django.utils import timezone
 from django.urls import reverse
+from cloudinary.models import CloudinaryField
 
 class Post(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True, max_length=200)
     author = models.CharField(max_length=100)
     content = models.TextField()
-    featured_image = models.ImageField(upload_to='blog_images/', blank=True, null=True)
+    # Changed from ImageField to CloudinaryField
+    featured_image = CloudinaryField('image', folder='blog_images/', blank=True, null=True)
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
     published = models.BooleanField(default=True)

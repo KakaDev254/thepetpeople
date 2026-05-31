@@ -1,47 +1,31 @@
-{% extends "main/base.html" %} {% load static %} {% block title %}Our Blog - The
-Pet People{% endblock %} {% block content %}
+{% extends "main/base.html" %}
+{% load static %}
+{% load cloudinary %}
+
+{% block title %}Our Blog - The Pet People{% endblock %}
+
+{% block content %}
 
 <!-- HERO SECTION -->
-<section
-  class="relative min-h-[50vh] flex items-center justify-center overflow-hidden"
->
+<section class="relative min-h-[50vh] flex items-center justify-center overflow-hidden">
   <!-- Background Image with Overlay -->
   <div class="absolute inset-0">
-    <div
-      class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50 z-10"
-    ></div>
-    <img
-      src="{% static 'core/images/blog-hero.jpg' %}"
-      alt="Blog Hero"
-      class="w-full h-full object-cover"
-      onerror="
-        this.src =
-          'https://images.unsplash.com/photo-1450778869180-41d0601e046e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'
-      "
-    />
+    <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50 z-10"></div>
+    {% cloudinary "core/images/blog-hero.jpg" width=1920 height=600 crop="fill" quality="auto" class="w-full h-full object-cover" alt="Blog Hero" %}
   </div>
 
   <div class="relative z-20 max-w-4xl mx-auto px-6 text-center">
     <div class="inline-flex items-center justify-center mb-6 animate-fade-in">
-      <div
-        class="w-20 h-20 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/20"
-      >
+      <div class="w-20 h-20 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/20">
         <i class="bx bx-pen text-4xl text-white"></i>
       </div>
     </div>
-    <h1
-      class="text-5xl md:text-7xl font-bold text-white mb-5 font-['Cormorant_Garamond'] animate-slide-up"
-    >
+    <h1 class="text-5xl md:text-7xl font-bold text-white mb-5 font-['Cormorant_Garamond'] animate-slide-up">
       Our Blog
     </h1>
-    <div
-      class="w-24 h-1 bg-[var(--club-rust)] mx-auto mb-6 animate-slide-up"
-    ></div>
-    <p
-      class="text-white/95 text-lg md:text-xl max-w-2xl mx-auto animate-slide-up leading-relaxed"
-    >
-      Discover heartfelt stories, expert pet care tips, and updates from our
-      furry family members
+    <div class="w-24 h-1 bg-[var(--club-rust)] mx-auto mb-6 animate-slide-up"></div>
+    <p class="text-white/95 text-lg md:text-xl max-w-2xl mx-auto animate-slide-up leading-relaxed">
+      Discover heartfelt stories, expert pet care tips, and updates from our furry family members
     </p>
   </div>
 </section>
@@ -51,13 +35,8 @@ Pet People{% endblock %} {% block content %}
   <div class="max-w-7xl mx-auto px-6">
     <!-- Section Header -->
     <div class="text-center mb-12">
-      <span
-        class="text-[var(--club-rust)] font-semibold uppercase tracking-wider text-sm"
-        >Latest Stories</span
-      >
-      <h2
-        class="text-3xl md:text-4xl font-bold text-[var(--club-dark-brown)] mt-2 mb-4"
-      >
+      <span class="text-[var(--club-rust)] font-semibold uppercase tracking-wider text-sm">Latest Stories</span>
+      <h2 class="text-3xl md:text-4xl font-bold text-[var(--club-dark-brown)] mt-2 mb-4">
         Read Our Latest <span class="text-[var(--club-rust)]">Articles</span>
       </h2>
       <div class="w-20 h-1 bg-[var(--club-rust)] mx-auto"></div>
@@ -66,39 +45,27 @@ Pet People{% endblock %} {% block content %}
     <!-- Posts Grid with fixed image heights -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {% for post in posts %}
-      <article
-        class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 flex flex-col border border-gray-100 h-full"
-      >
-        <!-- Featured Image - FIXED HEIGHT -->
-        <div
-          class="relative overflow-hidden h-72 bg-gradient-to-br from-[var(--club-taupe-light)] to-[var(--club-sand-light)] flex-shrink-0"
-        >
+      <article class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 flex flex-col border border-gray-100 h-full">
+        
+        <!-- Featured Image - FIXED HEIGHT with Cloudinary -->
+        <div class="relative overflow-hidden h-72 bg-gradient-to-br from-[var(--club-taupe-light)] to-[var(--club-sand-light)] flex-shrink-0">
           {% if post.featured_image %}
-          <img
-            src="{{ post.featured_image.url }}"
-            alt="{{ post.title }}"
-            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-            loading="lazy"
-          />
+            {% cloudinary post.featured_image.public_id width=600 height=400 crop="fill" quality="auto" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt=post.title loading="lazy" %}
           {% else %}
-          <div class="w-full h-full flex items-center justify-center">
-            <i class="bx bx-book-open text-6xl text-[var(--club-taupe)]"></i>
-          </div>
+            <div class="w-full h-full flex items-center justify-center">
+              <i class="bx bx-book-open text-6xl text-[var(--club-taupe)]"></i>
+            </div>
           {% endif %}
 
           <!-- Category Badge -->
           <div class="absolute top-4 left-4">
-            <span
-              class="px-3 py-1.5 bg-[var(--club-rust)] text-white text-xs rounded-full font-medium shadow-md"
-            >
+            <span class="px-3 py-1.5 bg-[var(--club-rust)] text-white text-xs rounded-full font-medium shadow-md">
               {{ post.category|default:"Pet Care" }}
             </span>
           </div>
 
           <!-- Hover Overlay -->
-          <div
-            class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center"
-          >
+          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
             <span class="text-white font-semibold flex items-center gap-2">
               Read Article <i class="bx bx-right-arrow-alt text-xl"></i>
             </span>
@@ -108,9 +75,7 @@ Pet People{% endblock %} {% block content %}
         <!-- Content -->
         <div class="p-6 flex flex-col flex-1 bg-white">
           <!-- Meta Info -->
-          <div
-            class="flex items-center gap-4 text-xs text-[var(--club-olive-light)] mb-3"
-          >
+          <div class="flex items-center gap-4 text-xs text-[var(--club-olive-light)] mb-3">
             <div class="flex items-center gap-1">
               <i class="bx bx-calendar-alt"></i>
               <span>{{ post.created_at|date:"M d, Y" }}</span>
@@ -122,33 +87,21 @@ Pet People{% endblock %} {% block content %}
           </div>
 
           <!-- Title -->
-          <h3
-            class="text-xl md:text-2xl font-bold text-[var(--club-dark-brown)] mb-3 leading-tight line-clamp-2"
-          >
-            <a
-              href="{{ post.get_absolute_url }}"
-              class="hover:text-[var(--club-rust)] transition-colors duration-300"
-            >
+          <h3 class="text-xl md:text-2xl font-bold text-[var(--club-dark-brown)] mb-3 leading-tight line-clamp-2">
+            <a href="{{ post.get_absolute_url }}" class="hover:text-[var(--club-rust)] transition-colors duration-300">
               {{ post.title }}
             </a>
           </h3>
 
           <!-- Excerpt - Fixed number of lines -->
-          <p
-            class="text-[var(--club-olive-light)] leading-relaxed mb-5 line-clamp-3"
-          >
+          <p class="text-[var(--club-olive-light)] leading-relaxed mb-5 line-clamp-3">
             {{ post.content|striptags|truncatewords:25 }}
           </p>
 
           <!-- Read More Link -->
-          <a
-            href="{{ post.get_absolute_url }}"
-            class="inline-flex items-center gap-2 text-[var(--club-rust)] font-semibold hover:gap-3 transition-all duration-300 mt-auto group-hover:text-[var(--club-dark-brown)]"
-          >
+          <a href="{{ post.get_absolute_url }}" class="inline-flex items-center gap-2 text-[var(--club-rust)] font-semibold hover:gap-3 transition-all duration-300 mt-auto group-hover:text-[var(--club-dark-brown)]">
             <span>Read Article</span>
-            <i
-              class="bx bx-right-arrow-alt text-xl transition-transform group-hover:translate-x-1"
-            ></i>
+            <i class="bx bx-right-arrow-alt text-xl transition-transform group-hover:translate-x-1"></i>
           </a>
         </div>
       </article>
@@ -157,17 +110,12 @@ Pet People{% endblock %} {% block content %}
       {% empty %}
       <div class="col-span-full">
         <div class="text-center py-20">
-          <div
-            class="inline-flex items-center justify-center w-24 h-24 bg-[var(--club-sand-light)] rounded-full mb-6"
-          >
+          <div class="inline-flex items-center justify-center w-24 h-24 bg-[var(--club-sand-light)] rounded-full mb-6">
             <i class="bx bx-news text-4xl text-[var(--club-rust)]"></i>
           </div>
-          <h3 class="text-2xl font-bold text-[var(--club-dark-brown)] mb-3">
-            No Posts Yet
-          </h3>
+          <h3 class="text-2xl font-bold text-[var(--club-dark-brown)] mb-3">No Posts Yet</h3>
           <p class="text-[var(--club-olive-light)] max-w-md mx-auto">
-            Our blog is being updated with fresh content. Check back soon for
-            pet care tips, stories, and updates!
+            Our blog is being updated with fresh content. Check back soon for pet care tips, stories, and updates!
           </p>
         </div>
       </div>
@@ -177,10 +125,7 @@ Pet People{% endblock %} {% block content %}
     <!-- View All Button (if you have more posts) -->
     {% if posts|length >= 6 %}
     <div class="text-center mt-12">
-      <a
-        href="#"
-        class="inline-flex items-center gap-2 border-2 border-[var(--club-rust)] text-[var(--club-rust)] hover:bg-[var(--club-rust)] hover:text-white font-semibold py-3 px-8 rounded-full transition-all duration-300"
-      >
+      <a href="#" class="inline-flex items-center gap-2 border-2 border-[var(--club-rust)] text-[var(--club-rust)] hover:bg-[var(--club-rust)] hover:text-white font-semibold py-3 px-8 rounded-full transition-all duration-300">
         Load More Articles
         <i class="bx bx-loader-circle"></i>
       </a>
@@ -193,12 +138,8 @@ Pet People{% endblock %} {% block content %}
 <style>
   /* Animations */
   @keyframes fade-in {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 
   @keyframes slide-up {
