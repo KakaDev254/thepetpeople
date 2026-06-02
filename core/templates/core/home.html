@@ -1,6 +1,5 @@
 {% extends "main/base.html" %}
 {% load static %}
-{% load cloudinary %}
 
 {% block title %}Home | ThePetPeople{% endblock %}
 
@@ -11,13 +10,13 @@
 
   <div id="hero-slider" class="absolute inset-0 z-0">
     <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover opacity-100 transition-opacity duration-1000">
-      <source src="{% cloudinary 'assets/hero1.mp4' resource_type='video' %}" type="video/mp4" />
+      <source src="{% static 'core/videos/hero1.mp4' %}" type="video/mp4" />
     </video>
     <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-1000">
-      <source src="{% cloudinary 'assets/hero3.mp4' resource_type='video' %}" type="video/mp4" />
+      <source src="{% static 'core/videos/hero3.mp4' %}" type="video/mp4" />
     </video>
     <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-1000">
-      <source src="{% cloudinary 'assets/hero4.mp4' resource_type='video' %}" type="video/mp4" />
+      <source src="{% static 'core/videos/hero4.mp4' %}" type="video/mp4" />
     </video>
   </div>
 
@@ -61,7 +60,6 @@
   </button>
 </div>
 
-
 <!-- ✅ ABOUT SECTION -->
 <section id="about" class="py-16 bg-gray-50">
   <div class="max-w-7xl mx-auto px-6 lg:px-8 text-center">
@@ -81,7 +79,7 @@
       <!-- Feature 1 -->
       <div class="bg-white rounded-lg shadow hover:shadow-xl transition-all duration-300 p-6 flex flex-col h-full">
         <div class="overflow-hidden rounded-md">
-          {% cloudinary "assets/about1.jpg" width=400 height=240 crop="fill" quality="auto" class="w-full h-60 object-cover hover:scale-105 transition-transform duration-500" alt="Pet Friendly Spaces" loading="lazy" %}
+          <img src="{% static 'core/images/about1.jpg' %}" class="w-full h-60 object-cover hover:scale-105 transition-transform duration-500" alt="Pet Friendly Spaces" loading="lazy">
         </div>
         <h3 class="text-xl font-semibold text-[var(--club-dark-brown)] mt-4 mb-2 font-['Cormorant_Garamond']">Spaces For Pets</h3>
         <p class="text-[var(--club-olive)] font-['Inter'] text-sm leading-relaxed">Safe and fun spaces for dogs, cats, and other pets to play and bond.</p>
@@ -93,7 +91,7 @@
       <!-- Feature 2 -->
       <div class="bg-white rounded-lg shadow hover:shadow-xl transition-all duration-300 p-6 flex flex-col h-full">
         <div class="overflow-hidden rounded-md">
-          {% cloudinary "assets/about3.jpg" width=400 height=240 crop="fill" quality="auto" class="w-full h-60 object-cover hover:scale-105 transition-transform duration-500" alt="Trusted and Loved" loading="lazy" %}
+          <img src="{% static 'core/images/about3.jpg' %}" class="w-full h-60 object-cover hover:scale-105 transition-transform duration-500" alt="Trusted and Loved" loading="lazy">
         </div>
         <h3 class="text-xl font-semibold text-[var(--club-dark-brown)] mt-4 mb-2 font-['Cormorant_Garamond']">Trusted & Loved</h3>
         <p class="text-[var(--club-olive)] font-['Inter'] text-sm leading-relaxed"><strong class="font-semibold">Vet-owned and led:</strong> the health, welfare and care of your pets are in dedicated and well trained hands.</p>
@@ -102,7 +100,7 @@
       <!-- Feature 3 -->
       <div class="bg-white rounded-lg shadow hover:shadow-xl transition-all duration-300 p-6 flex flex-col h-full">
         <div class="overflow-hidden rounded-md">
-          {% cloudinary "assets/about5.jpg" width=400 height=240 crop="fill" quality="auto" class="w-full h-60 object-cover hover:scale-105 transition-transform duration-500" alt="Safe & Secure" loading="lazy" %}
+          <img src="{% static 'core/images/about4.jpg' %}" class="w-full h-60 object-cover hover:scale-105 transition-transform duration-500" alt="Safe & Secure" loading="lazy">
         </div>
         <h3 class="text-xl font-semibold text-[var(--club-dark-brown)] mt-4 mb-2 font-['Cormorant_Garamond']">Safe & Secure</h3>
         <p class="text-[var(--club-olive)] font-['Inter'] text-sm leading-relaxed">A cozy, homely environment - a home away from home ensures peace of mind for pet owners.</p>
