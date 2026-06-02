@@ -132,21 +132,7 @@
 
         <!-- RIGHT ACTIONS (DESKTOP) -->
         <div class="hidden md:flex items-center space-x-4 font-['Montserrat']">
-          <!-- CART -->
-          <a
-            href="{% url 'view_cart' %}"
-            class="relative text-[var(--club-dark-brown)] hover:text-[var(--club-rust)] transition"
-            aria-label="View Cart"
-          >
-            <i class="bx bx-cart text-2xl"></i>
-            {% if cart_item_count %}
-            <span
-              class="absolute -top-2 -right-2 text-[var(--club-rust)] font-bold text-xs"
-            >
-              {{ cart_item_count }}
-            </span>
-            {% endif %}
-          </a>
+         
 
           <!-- LOGIN -->
           <a
