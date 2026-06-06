@@ -15,7 +15,9 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-1_c&uv4(qcgm)v1zoe=8m
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+# config/settings.py
+
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'thepetpeople.onrender.com', 'thepetpeople.co.ke', 'www.thepetpeople.co.ke']
 
 # This variable is automatically set by Render
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
