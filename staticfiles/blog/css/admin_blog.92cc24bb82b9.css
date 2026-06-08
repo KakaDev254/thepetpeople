@@ -1,0 +1,23 @@
+/* Make the content field larger and easier to use */
+.field-content textarea {
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    width: 100%;
+    min-height: 500px;
+    background-color: #fafafa;
+}
+
+/* Style the help text */
+.help {
+    font-size: 12px;
+    color: #666;
+}
+
+/* Make fieldset descriptions more visible */
+fieldset .description {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
