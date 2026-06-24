@@ -11,21 +11,27 @@
       <!-- Left side: social media -->
       <div class="flex items-center space-x-3">
         <a
-          href="#"
+          href="https://www.facebook.com/thepetpeopleke"
+          target="_blank"
+          rel="noopener noreferrer"
           class="hover:text-[var(--club-rust)] transition"
           aria-label="Facebook"
         >
           <i class="bx bxl-facebook text-sm"></i>
         </a>
         <a
-          href="#"
+          href="https://www.instagram.com/thepetpeopleke"
+          target="_blank"
+          rel="noopener noreferrer"
           class="hover:text-[var(--club-rust)] transition"
           aria-label="Instagram"
         >
           <i class="bx bxl-instagram text-sm"></i>
         </a>
         <a
-          href="#"
+          href="https://twitter.com/thepetpeopleke"
+          target="_blank"
+          rel="noopener noreferrer"
           class="hover:text-[var(--club-rust)] transition"
           aria-label="Twitter"
         >
@@ -43,12 +49,12 @@
       <!-- Right side: contact -->
       <div class="flex items-center space-x-2 font-['Montserrat']">
         <a
-          href="tel:+254700123456"
+          href="tel:+254798503335"
           class="flex items-center space-x-1 hover:text-[var(--club-rust)] transition"
         >
           <i class="bx bx-phone text-sm" aria-hidden="true"></i>
           <span class="sr-only">Call</span>
-          <span class="text-[11px]">+254 700 123 456</span>
+          <span class="text-[11px]">+254 798 503 335</span>
         </a>
       </div>
     </div>
@@ -75,7 +81,7 @@
           <!-- Brand Text -->
           <div class="leading-tight">
             <div class="text-sm font-medium text-[var(--club-dark-brown)]">
-              ThePetPeople
+              The Pet People
             </div>
             <div class="text-xs text-gray-500 hidden sm:block">
               Care • Groom • Love
@@ -109,10 +115,10 @@
           </a>
 
           <a
-            href="#contact"
+            href="{% url 'booking_form' %}"
             class="nav-link text-[var(--club-brown-deep)] hover:text-[var(--club-sand)]"
           >
-            Contact
+            Book Now
           </a>
 
           <a
@@ -132,7 +138,7 @@
 
         <!-- RIGHT ACTIONS (DESKTOP) -->
         <div class="hidden md:flex items-center space-x-4 font-['Montserrat']">
-          <!-- BOOK NOW BUTTON (Replaces Login) -->
+          <!-- BOOK NOW BUTTON -->
           <a
             href="{% url 'booking_form' %}"
             class="inline-block bg-[var(--club-rust)] hover:bg-[var(--club-dark-brown)] text-white tracking-wide uppercase py-2.5 px-6 transition duration-300"
@@ -211,8 +217,11 @@
           Events
         </a>
 
-        <a href="#contact" class="block px-3 py-2 rounded hover:bg-gray-100">
-          Contact
+        <a
+          href="{% url 'booking_form' %}"
+          class="block px-3 py-2 rounded hover:bg-gray-100"
+        >
+          Book Now
         </a>
 
         <a
@@ -229,7 +238,7 @@
           Shop
         </a>
 
-        <!-- BOOK NOW (MOBILE) - Replaces Login -->
+        <!-- BOOK NOW BUTTON (MOBILE) -->
         <div class="pt-2">
           <a
             href="{% url 'booking_form' %}"
