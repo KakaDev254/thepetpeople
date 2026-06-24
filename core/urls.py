@@ -6,4 +6,5 @@ urlpatterns = [
     path('book/', views.booking_form, name='booking_form'),
     path('booking-success/', views.booking_success, name='booking_success'),
     path('contact/', views.contact_view, name='contact'),
+    path('download-pdf/', views.download_pdf, name='download_pdf'),
 ]

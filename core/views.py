@@ -4,7 +4,8 @@ from django.contrib import messages
 from django.utils import timezone
 from django.conf import settings
 from django.core.mail import send_mail, EmailMessage
-
+from django.http import FileResponse
+import os
 # Third-party imports
 import json
 from datetime import datetime
@@ -216,3 +217,16 @@ def contact_view(request):
         return redirect('home')
     
     return redirect('home')
+
+def download_pdf(request):
+    pdf_path = os.path.join(settings.BASE_DIR, 'static', 'pdf', 'boarding_form.pdf')
+    
+    if os.path.exists(pdf_path):
+        return FileResponse(
+            open(pdf_path, 'rb'),
+            content_type='application/pdf',
+            filename='boarding_form.pdf'
+        )
+    else:
+        messages.error(request, 'The boarding form PDF is currently unavailable. Please contact us directly.')
+        return redirect('booking_form')

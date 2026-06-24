@@ -283,14 +283,16 @@
   </button>
 </div>
 
-        <!-- Download PDF Link -->
-        <div class="text-center mt-4">
-          <a href="{% static 'pdf/The-PPL-Boarding-Form.pdf' %}" download class="text-[var(--club-rust)] hover:underline text-sm">
-    📄 Download Boarding Form (PDF)
-</a>
-        </div>
-      </form>
-    </div>
+       <div class="text-center mt-6 pt-4 border-t border-gray-200">
+    <a href="{% url 'download_pdf' %}" class="inline-flex items-center gap-3 text-[var(--club-rust)] hover:text-[var(--club-dark-brown)] transition font-medium">
+        <i class="bx bx-download text-xl"></i>
+        Download Boarding Form (PDF)
+    </a>
+    <p class="text-xs text-gray-400 mt-2">
+        <i class="bx bx-info-circle"></i>
+        If the download doesn't work, email us at <a href="mailto:info@thepetpeople.co.ke" class="text-[var(--club-rust)] hover:underline">info@thepetpeople.co.ke</a>
+    </p>
+</div>
 
     <!-- WhatsApp Floating Button -->
     <div class="fixed bottom-6 right-6 z-50">
