@@ -132,15 +132,13 @@
 
         <!-- RIGHT ACTIONS (DESKTOP) -->
         <div class="hidden md:flex items-center space-x-4 font-['Montserrat']">
-         
-
-          <!-- LOGIN -->
+          <!-- BOOK NOW BUTTON (Replaces Login) -->
           <a
-            href="#"
-            class="inline-block bg-[var(--club-sand-light)] hover:bg-[var(--club-dark-brown)] text-white tracking-wide uppercase py-2.5 px-6 transition duration-300"
+            href="{% url 'booking_form' %}"
+            class="inline-block bg-[var(--club-rust)] hover:bg-[var(--club-dark-brown)] text-white tracking-wide uppercase py-2.5 px-6 transition duration-300"
             style="border-radius: 0"
           >
-            Login
+            Book Now
           </a>
         </div>
 
@@ -231,28 +229,13 @@
           Shop
         </a>
 
-        <!-- CART (MOBILE) -->
-        <a
-          href="{% url 'view_cart' %}"
-          class="flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-100"
-        >
-          <i class="bx bx-cart text-xl"></i>
-          View Cart {% if cart_item_count %}
-          <span
-            class="bg-[var(--club-rust)] text-white text-xs font-bold px-1.5 py-0.5 rounded-full"
-          >
-            {{ cart_item_count }}
-          </span>
-          {% endif %}
-        </a>
-
-        <!-- LOGIN (MOBILE) -->
+        <!-- BOOK NOW (MOBILE) - Replaces Login -->
         <div class="pt-2">
           <a
-            href="#"
-            class="block bg-[var(--club-sand-light)] hover:bg-[var(--club-dark-brown)] text-white uppercase py-2.5 px-6 text-center transition"
+            href="{% url 'booking_form' %}"
+            class="block bg-[var(--club-rust)] hover:bg-[var(--club-dark-brown)] text-white uppercase py-2.5 px-6 text-center transition"
           >
-            Login
+            Book Now
           </a>
         </div>
       </div>
