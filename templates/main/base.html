@@ -68,6 +68,26 @@
           padding-top: 80px;
         }
       }
+
+      /* WhatsApp Button Animation */
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+      .whatsapp-float {
+        animation: pulse 2s infinite;
+      }
+      .whatsapp-float:hover {
+        animation: none;
+        transform: scale(1.1);
+      }
     </style>
 
     {% block extra_head %}{% endblock %}
@@ -95,6 +115,16 @@
 
     <!-- FOOTER -->
     {% include "main/partials/footer.html" %}
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/254798503335?text=Hi!%20I%20found%20The%20Pet%20People%20website%20and%20would%20like%20to%20make%20an%20inquiry." 
+       target="_blank" 
+       rel="noopener noreferrer"
+       class="whatsapp-float fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white px-4 py-3 rounded-full shadow-lg transition-all duration-300 hover:shadow-xl"
+       aria-label="Chat on WhatsApp">
+      <i class="bx bxl-whatsapp text-2xl"></i>
+      <span class="font-semibold text-sm hidden sm:inline">Chat on WhatsApp</span>
+    </a>
 
     <!-- JS Scripts -->
     <script src="{% static 'js/main.js' %}"></script>

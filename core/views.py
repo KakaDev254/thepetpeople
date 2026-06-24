@@ -10,7 +10,8 @@ import json
 from datetime import datetime
 
 # Local application imports
-from .models import ContactMessage, BookingForm
+from .models import ContactMessage
+from .forms import BookingForm 
 from events.models import Event
 from blog.models import Post
 
@@ -26,7 +27,7 @@ def home(request):
     past_events = (
         Event.objects
         .filter(date__lt=today, is_published=True)
-        .order_by('-date')[:2]   # limit for homepage
+        .order_by('-date')[:2]
     )
 
     return render(request, "core/home.html", {
@@ -195,8 +196,10 @@ Date: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
     
     return render(request, 'core/booking_form.html')
 
+
 def booking_success(request):
     return render(request, 'core/booking_success.html')
+
 
 def contact_view(request):
     if request.method == 'POST':
