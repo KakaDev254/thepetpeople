@@ -1,0 +1,31 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}Booking Confirmed - The Pet People{% endblock %}
+
+{% block content %}
+<section class="py-20 bg-gray-50 min-h-[60vh] flex items-center">
+  <div class="max-w-2xl mx-auto px-6 text-center">
+    <div class="bg-white rounded-2xl shadow-lg p-12">
+      <div class="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+        <i class="bx bx-check-circle text-5xl text-green-600"></i>
+      </div>
+      <h1 class="text-3xl font-bold text-[var(--club-dark-brown)] mb-4">Booking Request Sent! 🎉</h1>
+      <p class="text-[var(--club-olive)] text-lg mb-6">Thank you for your booking request. We have received your details and will contact you shortly to confirm your pet's stay.</p>
+      <div class="bg-gray-50 rounded-lg p-4 mb-6">
+        <p class="text-sm text-[var(--club-olive-light)]">📧 You will receive a confirmation email soon.</p>
+        <p class="text-sm text-[var(--club-olive-light)]">📞 For urgent inquiries, call us at +254 798 503 335</p>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="{% url 'home' %}" class="bg-[var(--club-rust)] hover:bg-[var(--club-dark-brown)] text-white px-6 py-2 rounded-lg transition">
+          Back to Home
+        </a>
+        <a href="https://wa.me/254798503335" target="_blank" class="bg-[#25D366] hover:bg-[#128C7E] text-white px-6 py-2 rounded-lg transition flex items-center justify-center gap-2">
+          <i class="bx bxl-whatsapp"></i>
+          Chat on WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

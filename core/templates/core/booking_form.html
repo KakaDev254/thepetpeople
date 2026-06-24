@@ -1,0 +1,304 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}Book a Service - The Pet People{% endblock %}
+
+{% block content %}
+<section class="py-20 bg-gray-50">
+  <div class="max-w-4xl mx-auto px-6">
+    <div class="bg-white rounded-2xl shadow-lg p-8">
+      <h1 class="text-4xl font-bold text-[var(--club-dark-brown)] mb-2 font-['Cormorant_Garamond']">Pet Boarding Request</h1>
+      <p class="text-[var(--club-olive)] mb-8">Please fill in this form to request a boarding service for your pet.</p>
+
+      <form method="POST" class="space-y-8" id="bookingForm">
+        {% csrf_token %}
+
+        <!-- OWNER DETAILS -->
+        <div class="border-l-4 border-[var(--club-rust)] pl-4">
+          <h2 class="text-xl font-semibold text-[var(--club-dark-brown)] mb-4">Owner Details</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
+              <input type="text" name="owner_name" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[var(--club-rust)]">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number *</label>
+              <input type="tel" name="phone" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[var(--club-rust)]">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Email Address *</label>
+              <input type="email" name="email" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[var(--club-rust)]">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Physical Address</label>
+              <input type="text" name="address" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[var(--club-rust)]">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Emergency Contact Name *</label>
+              <input type="text" name="emergency_contact_name" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[var(--club-rust)]">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Emergency Contact Phone *</label>
+              <input type="tel" name="emergency_contact_phone" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[var(--club-rust)]">
+            </div>
+          </div>
+        </div>
+
+        <!-- PET INFORMATION -->
+        <div class="border-l-4 border-[var(--club-rust)] pl-4">
+          <h2 class="text-xl font-semibold text-[var(--club-dark-brown)] mb-4">Pet Information</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Pet Name *</label>
+              <input type="text" name="pet_name" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[var(--club-rust)]">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Pet Type *</label>
+              <select name="pet_type" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[var(--club-rust)]">
+                <option value="">Select...</option>
+                <option value="Dog">Dog</option>
+                <option value="Cat">Cat</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Breed</label>
+              <input type="text" name="breed" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[var(--club-rust)]">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Sex *</label>
+              <select name="sex" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[var(--club-rust)]">
+                <option value="">Select...</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Microchipped?</label>
+              <select name="microchipped" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[var(--club-rust)]">
+                <option value="No">No</option>
+                <option value="Yes">Yes</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Microchip Number</label>
+              <input type="text" name="microchip_number" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[var(--club-rust)]">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Color / Markings</label>
+              <input type="text" name="color" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[var(--club-rust)]">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Age (Estimate)</label>
+              <input type="text" name="age" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[var(--club-rust)]">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Sterilized (Spay/Castration)?</label>
+              <select name="sterilized" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[var(--club-rust)]">
+                <option value="No">No</option>
+                <option value="Yes">Yes</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- BOARDING DETAILS -->
+        <div class="border-l-4 border-[var(--club-rust)] pl-4">
+          <h2 class="text-xl font-semibold text-[var(--club-dark-brown)] mb-4">Boarding Details</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Check-in Date *</label>
+              <input type="date" name="check_in_date" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[var(--club-rust)]">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Check-out Date *</label>
+              <input type="date" name="check_out_date" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[var(--club-rust)]">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Drop-Off Time</label>
+              <input type="time" name="drop_off_time" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[var(--club-rust)]">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Expected Pick-Up Time</label>
+              <input type="time" name="pick_up_time" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[var(--club-rust)]">
+            </div>
+          </div>
+        </div>
+
+        <!-- ITEMS LEFT -->
+        <div class="border-l-4 border-[var(--club-rust)] pl-4">
+          <h2 class="text-xl font-semibold text-[var(--club-dark-brown)] mb-4">Items Left With Pet</h2>
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+            <label class="flex items-center gap-2"><input type="checkbox" name="items_left" value="Food"> Food</label>
+            <label class="flex items-center gap-2"><input type="checkbox" name="items_left" value="Treats"> Treats</label>
+            <label class="flex items-center gap-2"><input type="checkbox" name="items_left" value="Bedding/Banket"> Bedding/Banket</label>
+            <label class="flex items-center gap-2"><input type="checkbox" name="items_left" value="Toys"> Toys</label>
+            <label class="flex items-center gap-2"><input type="checkbox" name="items_left" value="Medication"> Medication</label>
+            <label class="flex items-center gap-2"><input type="checkbox" name="items_left" value="Leash/Collar"> Leash/Collar</label>
+          </div>
+          <div class="mt-2">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Other Items</label>
+            <input type="text" name="other_items" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[var(--club-rust)]">
+          </div>
+        </div>
+
+        <!-- VACCINATION -->
+        <div class="border-l-4 border-[var(--club-rust)] pl-4">
+          <h2 class="text-xl font-semibold text-[var(--club-dark-brown)] mb-4">Vaccination Requirements</h2>
+          <p class="text-sm text-gray-600 mb-3">All pets must be fully immunized before boarding.</p>
+          <div class="space-y-2">
+            <label class="flex items-center gap-2"><input type="checkbox" name="vaccination_proof" value="Yes"> Proof of vaccination provided</label>
+            <label class="flex items-center gap-2"><input type="checkbox" name="rabies_vaccine" value="Yes"> Rabies vaccination up to date</label>
+            <label class="flex items-center gap-2"><input type="checkbox" name="dhlp_vaccine" value="Yes"> DHLP vaccines up to date</label>
+            <label class="flex items-center gap-2"><input type="checkbox" name="deworming" value="Yes"> Deworming completed</label>
+            <label class="flex items-center gap-2"><input type="checkbox" name="flea_tick" value="Yes"> Flea/tick prevention active</label>
+          </div>
+        </div>
+
+        <!-- VETERINARIAN -->
+        <div class="border-l-4 border-[var(--club-rust)] pl-4">
+          <h2 class="text-xl font-semibold text-[var(--club-dark-brown)] mb-4">Veterinarian Information</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Veterinary Clinic</label>
+              <input type="text" name="vet_clinic" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[var(--club-rust)]">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Veterinarian Name</label>
+              <input type="text" name="vet_name" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[var(--club-rust)]">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Veterinarian Phone</label>
+              <input type="tel" name="vet_phone" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[var(--club-rust)]">
+            </div>
+          </div>
+        </div>
+
+        <!-- MEDICATION -->
+        <div class="border-l-4 border-[var(--club-rust)] pl-4">
+          <h2 class="text-xl font-semibold text-[var(--club-dark-brown)] mb-4">Medication</h2>
+          <div class="space-y-3">
+            <label class="flex items-center gap-2"><input type="checkbox" name="on_medication" value="Yes"> Is your pet currently on medication?</label>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Medication Name</label>
+              <input type="text" name="medication_name" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[var(--club-rust)]">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Dosage</label>
+              <input type="text" name="dosage" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[var(--club-rust)]">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Administration Instructions</label>
+              <textarea name="admin_instructions" rows="2" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[var(--club-rust)]"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- FEEDING -->
+        <div class="border-l-4 border-[var(--club-rust)] pl-4">
+          <h2 class="text-xl font-semibold text-[var(--club-dark-brown)] mb-4">Feeding Instructions</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Food Type</label>
+              <input type="text" name="food_type" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[var(--club-rust)]">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Feeding Schedule</label>
+              <select name="feeding_schedule" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[var(--club-rust)]">
+                <option value="">Select...</option>
+                <option value="Once daily">Once daily</option>
+                <option value="Twice daily">Twice daily</option>
+                <option value="Three times daily">Three times daily</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Portion Size</label>
+              <input type="text" name="portion_size" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[var(--club-rust)]">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Special Diet Instructions</label>
+              <textarea name="special_diet" rows="2" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[var(--club-rust)]"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- BEHAVIOR -->
+        <div class="border-l-4 border-[var(--club-rust)] pl-4">
+          <h2 class="text-xl font-semibold text-[var(--club-dark-brown)] mb-4">Behavioral Information</h2>
+          <p class="text-sm text-gray-600 mb-3">Has your pet shown any of the following behaviors?</p>
+          <div class="grid grid-cols-2 gap-2">
+            <label class="flex items-center gap-2"><input type="checkbox" name="behaviors" value="Aggression toward people"> Aggression toward people</label>
+            <label class="flex items-center gap-2"><input type="checkbox" name="behaviors" value="Aggression toward other animals"> Aggression toward other animals</label>
+            <label class="flex items-center gap-2"><input type="checkbox" name="behaviors" value="Separation anxiety"> Separation anxiety</label>
+            <label class="flex items-center gap-2"><input type="checkbox" name="behaviors" value="None"> None</label>
+            <label class="flex items-center gap-2"><input type="checkbox" name="behaviors" value="Escape attempts"> Escape attempts</label>
+            <label class="flex items-center gap-2"><input type="checkbox" name="behaviors" value="Excessive barking"> Excessive barking</label>
+          </div>
+          <div class="mt-2">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Additional Notes</label>
+            <textarea name="behavior_notes" rows="2" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[var(--club-rust)]"></textarea>
+          </div>
+        </div>
+
+        <!-- ADDITIONAL SERVICES -->
+        <div class="border-l-4 border-[var(--club-rust)] pl-4">
+          <h2 class="text-xl font-semibold text-[var(--club-dark-brown)] mb-4">Additional Services</h2>
+          <div class="grid grid-cols-2 gap-2">
+            <label class="flex items-center gap-2"><input type="checkbox" name="services" value="Nail Trim"> Nail Trim / Nail Clipping</label>
+            <label class="flex items-center gap-2"><input type="checkbox" name="services" value="Training"> Training session</label>
+            <label class="flex items-center gap-2"><input type="checkbox" name="services" value="Bath"> Bath before pick-up</label>
+            <label class="flex items-center gap-2"><input type="checkbox" name="services" value="Grooming"> Grooming</label>
+          </div>
+          <div class="mt-2">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Other Requests</label>
+            <input type="text" name="other_requests" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[var(--club-rust)]">
+          </div>
+        </div>
+
+        <!-- TERMS -->
+        <div class="border-l-4 border-[var(--club-rust)] pl-4">
+          <h2 class="text-xl font-semibold text-[var(--club-dark-brown)] mb-4">Terms & Conditions</h2>
+          <div class="bg-gray-50 p-4 rounded-lg max-h-60 overflow-y-auto text-sm space-y-2">
+            <p><strong>1. Vaccination Policy:</strong> All pets admitted for boarding must be fully vaccinated, dewormed, and on flea/tick prevention. Proof of vaccination is required upon check-in. The Pet People reserves the right to refuse admission if vaccination requirements are not met.</p>
+            <p><strong>2. Health Declaration:</strong> The owner confirms that their pet is in good health and free from contagious illnesses or parasites at the time of check-in.</p>
+            <p><strong>3. Payment Policy:</strong> Full payment for boarding services must be made at check-in unless prior arrangements have been agreed upon in writing. Additional services requested during the stay will be charged accordingly.</p>
+            <p><strong>4. Pick-Up Policy:</strong> Pets must be collected by 12:00 noon on the agreed check-out date. Pets collected after this time will incur an additional full day boarding fee. Owners must provide at least 24 hours notice for intended pick-up time.</p>
+            <p><strong>5. Extended Stay:</strong> If the owner wishes to extend the boarding period, this must be communicated in advance and confirmed with payment for the additional days.</p>
+            <p><strong>6. Abandoned Pets:</strong> If a pet is not collected within 14 days after the agreed boarding period, and no communication has been received, the pet may be considered abandoned. The Pet People reserves the right to rehome the pet at its discretion without compensation to the owner.</p>
+            <p><strong>7. Emergency Veterinary Care:</strong> In the event of illness, injury, or emergency, The Pet People is authorized to seek veterinary care for the pet. The owner agrees to assume full financial responsibility for any veterinary costs incurred.</p>
+            <p><strong>8. Liability:</strong> While every reasonable effort will be made to ensure the safety and well-being of all pets, boarding is undertaken at the owner's risk. The Pet People shall not be held liable for illness, injury, loss, or death of a pet during their stay except in cases of proven gross negligence.</p>
+          </div>
+          <div class="mt-4">
+            <label class="flex items-center gap-2">
+              <input type="checkbox" name="terms_agreed" value="Agreed" required>
+              <span class="text-sm">I confirm that the information provided is accurate and that I have read and agreed to the terms and conditions of this boarding agreement.</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- SUBMIT -->
+        <div class="text-center">
+          <button type="submit" class="bg-[var(--club-rust)] hover:bg-[var(--club-dark-brown)] text-white font-semibold px-12 py-3 rounded-lg transition text-lg">
+            Submit Booking Request
+          </button>
+        </div>
+
+        <!-- Download PDF Link -->
+        <div class="text-center mt-4">
+          <a href="{% static 'pdf/The-PPL-Boarding-Form.pdf' %}" download class="text-[var(--club-rust)] hover:underline text-sm">
+            📄 Download Boarding Form (PDF)
+          </a>
+        </div>
+      </form>
+    </div>
+
+    <!-- WhatsApp Floating Button -->
+    <div class="fixed bottom-6 right-6 z-50">
+      <a href="https://wa.me/254798503335" target="_blank" class="flex items-center gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white px-4 py-3 rounded-full shadow-lg transition transform hover:scale-105">
+        <i class="bx bxl-whatsapp text-2xl"></i>
+        <span class="font-semibold">Chat on WhatsApp</span>
+      </a>
+    </div>
+  </div>
+</section>
+{% endblock %}
