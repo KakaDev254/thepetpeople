@@ -6,7 +6,6 @@
 
 {% block content %}
 
-
 <!-- HERO SECTION -->
 <section class="relative h-[50vh] flex items-center justify-center overflow-hidden">
   <!-- Background Image -->
@@ -28,14 +27,108 @@
       Our <span class="text-[var(--club-sand-light)]">Shop</span>
     </h1>
     <div class="w-24 h-1 bg-[var(--club-rust)] mx-auto mb-6 animate-slide-up"></div>
-    <p class="text-white/95 text-lg md:text-xl max-w-2xl mx-auto animate-slide-up leading-relaxed">
-      Find everything your furry friend deserves
-    </p>
+   
   </div>
 
   <!-- Scroll Down Indicator -->
   <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 animate-bounce">
     <i class="bx bx-chevron-down text-3xl text-white"></i>
+  </div>
+</section>
+
+<!-- THE PET PEOPLE COLLECTION - ABOUT US SECTION -->
+<section class="py-20 bg-[#fefcf7]">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <!-- Left Column: Text Content -->
+      <div>
+        <h2 class="text-4xl md:text-5xl font-bold text-[var(--club-dark-brown)] mb-6 font-['Cormorant_Garamond']">
+          The Pet People <span class="text-[var(--club-rust)]">Collection</span>
+        </h2>
+        <h3 class="text-xl font-semibold text-[var(--club-olive)] mb-4 font-['Inter'] tracking-wide uppercase">
+          ABOUT US
+        </h3>
+        <p class="text-2xl md:text-3xl font-semibold text-[var(--club-dark-brown)] mb-6 font-['Cormorant_Garamond'] leading-tight">
+          We design sculptural, beautiful & functional pieces of art for your pets and home
+        </p>
+        <p class="text-[var(--club-olive-light)] text-lg leading-relaxed font-['Inter']">
+          From furniture, apparel, ceramics, fur care, art and more; our inspiration stems from pets and the world around us.
+        </p>
+        <div class="mt-8">
+          <a href="#" class="inline-flex items-center gap-2 text-[var(--club-rust)] hover:text-[var(--club-dark-brown)] transition font-semibold">
+            View Collection <i class="bx bx-right-arrow-alt"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Column: Image Placeholder -->
+     <div class="relative max-w-md mx-auto">
+  <div class="bg-[var(--club-sand-light)] rounded-2xl overflow-hidden shadow-xl aspect-square max-h-[400px] flex items-center justify-center">
+    <img src="{% static 'core/images/collection-placeholder.jpg' %}" 
+         alt="The Pet People Collection" 
+         class="w-full h-full object-cover"
+         onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22%3E%3Crect fill=%22%23d2b699%22 width=%22400%22 height=%22400%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2220%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23827259%22%3ECollection%3C/text%3E%3C/svg%3E'">
+  </div>
+</div>
+  <!-- Decorative Element -->
+  <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-[var(--club-rust)] opacity-10 rounded-full"></div>
+  <div class="absolute -top-4 -left-4 w-16 h-16 bg-[var(--club-sand)] opacity-20 rounded-full"></div>
+</div>
+    </div>
+  </div>
+</section>
+
+<!-- BRAND ETHOS & OUR STORY SECTION -->
+<section class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+      <!-- Brand Ethos -->
+      <div class="bg-[var(--club-sand-light)] p-10 rounded-2xl">
+        <h3 class="text-sm font-semibold text-[var(--club-rust)] uppercase tracking-wider mb-4 font-['Inter']">
+          ABOUT THE BRAND
+        </h3>
+        <h2 class="text-3xl md:text-4xl font-bold text-[var(--club-dark-brown)] mb-6 font-['Cormorant_Garamond']">
+          Brand <span class="text-[var(--club-rust)]">Ethos</span>
+        </h2>
+        <ul class="space-y-4 text-[var(--club-olive)] font-['Inter'] leading-relaxed">
+          <li class="flex items-start gap-3">
+            <i class="bx bx-check-circle text-[var(--club-rust)] text-xl mt-1"></i>
+            <span>From furniture, apparel, ceramics, fur care, art and more; our inspiration stems from pets and the world around us</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <i class="bx bx-check-circle text-[var(--club-rust)] text-xl mt-1"></i>
+            <span>We endeavor to build in Kenya, support local artisans while using materials that are gentle and safe for animals, people and the environment</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Our Story -->
+      <div class="bg-white p-10 rounded-2xl border border-gray-100 shadow-sm">
+        <h3 class="text-sm font-semibold text-[var(--club-rust)] uppercase tracking-wider mb-4 font-['Inter']">
+          OUR STORY
+        </h3>
+        <h2 class="text-3xl md:text-4xl font-bold text-[var(--club-dark-brown)] mb-6 font-['Cormorant_Garamond']">
+          Our <span class="text-[var(--club-rust)]">Story</span>
+        </h2>
+        <p class="text-[var(--club-olive)] font-['Inter'] text-lg leading-relaxed">
+          The Pet People Collection is founded by veterinary doctors who share a deep love for animals and a deeper understanding of the interconnectedness between humans, animals and our environment.
+        </p>
+        <div class="mt-8 flex items-center gap-4">
+          <div class="flex -space-x-2">
+            <div class="w-12 h-12 rounded-full bg-[var(--club-sand)] border-2 border-white flex items-center justify-center text-[var(--club-dark-brown)] font-semibold">
+              <i class="bx bx-plus-medical text-xl"></i>
+            </div>
+            <div class="w-12 h-12 rounded-full bg-[var(--club-taupe)] border-2 border-white flex items-center justify-center text-white font-semibold">
+              <i class="bx bx-heart text-xl"></i>
+            </div>
+            <div class="w-12 h-12 rounded-full bg-[var(--club-rust)] border-2 border-white flex items-center justify-center text-white font-semibold">
+              <i class="bx bx-paw text-xl"></i>
+            </div>
+          </div>
+          <span class="text-sm text-[var(--club-olive-light)] font-['Inter']">Veterinary Founded</span>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
